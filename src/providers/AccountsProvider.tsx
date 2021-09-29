@@ -1,6 +1,5 @@
 import React, { createContext, ReactNode } from "react";
 import { useQuery } from "react-query";
-import { token } from "../constants/token";
 import { baseUrl } from "../constants/upApi";
 import { AccountResponse } from "../types/account";
 import { queryProps } from "../utils/createQueryProps";
