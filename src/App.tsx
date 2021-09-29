@@ -1,38 +1,36 @@
-import * as React from "react"
+import * as React from "react";
 import {
-  ChakraProvider,
   Box,
-  Text,
-  Link,
-  VStack,
-  Code,
-  Grid,
-  theme,
-} from "@chakra-ui/react"
-import { ColorModeSwitcher } from "./ColorModeSwitcher"
-import { Logo } from "./Logo"
+  ChakraProvider,
+  Container,
+  Flex,
+  Spinner,
+} from "@chakra-ui/react";
+import { Router } from "@reach/router";
+import { theme } from "./theme/theme";
+import { Home } from "./views/Home/Home";
+import { Nav } from "./components/Nav/Nav";
+import { Savers } from "./views/Savers/Savers";
+import { Saver } from "./views/Saver/Saver";
+import { useAccounts } from "./hooks/useAccounts";
+import { Loader } from "./components/Loader/Loader";
 
-export const App = () => (
-  <ChakraProvider theme={theme}>
-    <Box textAlign="center" fontSize="xl">
-      <Grid minH="100vh" p={3}>
-        <ColorModeSwitcher justifySelf="flex-end" />
-        <VStack spacing={8}>
-          <Logo h="40vmin" pointerEvents="none" />
-          <Text>
-            Edit <Code fontSize="xl">src/App.tsx</Code> and save to reload.
-          </Text>
-          <Link
-            color="teal.500"
-            href="https://chakra-ui.com"
-            fontSize="2xl"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn Chakra
-          </Link>
-        </VStack>
-      </Grid>
-    </Box>
-  </ChakraProvider>
-)
+export const App = () => {
+  const { isLoading } = useAccounts();
+  return (
+    <ChakraProvider theme={theme}>
+      <Nav />
+      <Container>
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <Router>
+            <Home path="/" />
+            <Savers path="/savers" />
+            <Saver path="/savers/:id" />
+          </Router>
+        )}
+      </Container>
+    </ChakraProvider>
+  );
+};
