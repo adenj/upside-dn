@@ -1,11 +1,5 @@
 import * as React from "react";
-import {
-  Box,
-  ChakraProvider,
-  Container,
-  Flex,
-  Spinner,
-} from "@chakra-ui/react";
+import { ChakraProvider, Container } from "@chakra-ui/react";
 import { Router } from "@reach/router";
 import { theme } from "./theme/theme";
 import { Home } from "./views/Home/Home";

@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { Image, useColorMode } from "@chakra-ui/react";
 import logoDarkMode from "./up-logo.png";
 import logoLightMode from "./up-logo-light.png";

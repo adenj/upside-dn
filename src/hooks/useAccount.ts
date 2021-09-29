@@ -1,8 +1,7 @@
-import React from "react";
 import { useQuery } from "react-query";
-import { token } from "../constants/token";
 import { baseUrl } from "../constants/upApi";
 import { TransactionResponse } from "../types/transaction";
+import { queryProps } from "../utils/createQueryProps";
 
 export const useAccount = (id: string) => {
   const { data, isLoading, error } = useQuery<TransactionResponse, Error>(
@@ -10,12 +9,7 @@ export const useAccount = (id: string) => {
     async () => {
       return await fetch(
         `${baseUrl}/accounts/${id}/transactions?page[size]=30`,
-        {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
+        queryProps
       ).then((res) => res.json());
     }
   );

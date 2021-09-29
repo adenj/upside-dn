@@ -5,7 +5,6 @@ import { TransactionList } from "../../components/Transactions/TransactionList";
 import { useQuery } from "react-query";
 import { TransactionResponse } from "../../types/transaction";
 import { baseUrl } from "../../constants/upApi";
-import { token } from "../../constants/token";
 import { useAccounts } from "../../hooks/useAccounts";
 import { AvailableBalance } from "../../components/AvailableBalance/AvailableBalance";
 import { queryProps } from "../../utils/createQueryProps";
@@ -16,7 +15,7 @@ export const Home = (props: RouteComponentProps) => {
   const spendingAccount = accounts.data.find(
     (acc) => acc.attributes.displayName === "Spending"
   );
-  const { data, isLoading, error } = useQuery<TransactionResponse>(
+  const { data, isLoading } = useQuery<TransactionResponse>(
     "transactions",
     async () => {
       return await fetch(
@@ -33,7 +32,7 @@ export const Home = (props: RouteComponentProps) => {
       <AvailableBalance
         amount={spendingAccount?.attributes.balance.valueInBaseUnits!}
       />
-      <TransactionList list={data?.data} />
+      <TransactionList list={data?.data!} />
     </Box>
   );
 };
