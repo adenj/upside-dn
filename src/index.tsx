@@ -6,6 +6,7 @@ import ReactDOM from "react-dom";
 import { App } from "./App";
 import { AccountsProvider } from "./providers/AccountsProvider";
 import { QueryProvider } from "./providers/QueryProvider";
+import { TokenProvider } from "./providers/TokenProvider";
 import reportWebVitals from "./reportWebVitals";
 import * as serviceWorker from "./serviceWorker";
 
@@ -14,9 +15,11 @@ ReactDOM.render(
     <ColorModeScript initialColorMode="dark" />
     <LocationProvider>
       <QueryProvider>
-        <AccountsProvider>
-          <App />
-        </AccountsProvider>
+        <TokenProvider>
+          <AccountsProvider>
+            <App />
+          </AccountsProvider>
+        </TokenProvider>
       </QueryProvider>
     </LocationProvider>
   </React.StrictMode>,

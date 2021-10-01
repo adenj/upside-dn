@@ -8,16 +8,19 @@ import { Savers } from "./views/Savers/Savers";
 import { Saver } from "./views/Saver/Saver";
 import { useAccounts } from "./hooks/useAccounts";
 import { Loader } from "./components/Loader/Loader";
+import { TokenPrompt } from "./views/TokenPrompt/TokenPrompt";
+import { useToken } from "./hooks/useToken";
 
 export const App = () => {
-  const { isLoading } = useAccounts();
+  const { isLoading, data } = useAccounts();
+  const { token } = useToken();
   return (
     <ChakraProvider theme={theme}>
       <Nav />
       <Container>
-        {isLoading ? (
-          <Loader />
-        ) : (
+        {!token && <TokenPrompt />}
+        {isLoading && <Loader />}
+        {data && (
           <Router>
             <Home path="/" />
             <Savers path="/savers" />

@@ -1,26 +1,36 @@
-import { Box, Text, Grid } from "@chakra-ui/layout";
+import { Box, Text, Grid, Flex } from "@chakra-ui/layout";
 import React from "react";
 import { Container, GridItem } from "@chakra-ui/react";
 import { ColorModeToggle } from "../ColorModeToggle/ColorModeToggle";
 import { Link } from "../Link";
 import { Logo } from "../Logo/Logo";
 import { useLocation } from "@reach/router";
+import { useToken } from "../../hooks/useToken";
 
 export const Nav = () => {
+  const { token } = useToken();
   return (
     <Box as="nav" paddingY="4">
       <Container>
-        <Grid templateColumns="3fr 2fr 2fr 2fr 1fr" alignItems="center">
-          <GridItem>
+        {token ? (
+          <Grid templateColumns="3fr 2fr 2fr 2fr 2fr 1fr" alignItems="center">
+            <GridItem>
+              <Logo />
+            </GridItem>
+            <NavItem label="Home" path="/" />
+            <NavItem label="Savers" path="/savers" />
+            <NavItem label="Help" path="/help" />
+            <NavItem label="Settings" path="/settings" />
+            <GridItem>
+              <ColorModeToggle />
+            </GridItem>
+          </Grid>
+        ) : (
+          <Flex alignItems="center" justifyContent="space-between">
             <Logo />
-          </GridItem>
-          <NavItem label="Home" path="/" />
-          <NavItem label="Savers" path="/savers" />
-          <NavItem label="Help" path="/help" />
-          <GridItem>
             <ColorModeToggle />
-          </GridItem>
-        </Grid>
+          </Flex>
+        )}
       </Container>
     </Box>
   );
