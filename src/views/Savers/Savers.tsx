@@ -1,9 +1,7 @@
-import { Box, HStack, LinkBox, Stack, Text, VStack } from "@chakra-ui/layout";
+import { Box, Stack, Text } from "@chakra-ui/layout";
 import { RouteComponentProps } from "@reach/router";
 import React from "react";
-import { Link } from "../../components/Link";
 import { useAccounts } from "../../hooks/useAccounts";
-import { formatMoney } from "../../utils/formatMoney";
 import { Saver } from "../../components/Saver/Saver";
 import { Balance } from "../../components/Balance/Balance";
 

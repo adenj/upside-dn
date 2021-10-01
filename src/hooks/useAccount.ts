@@ -3,7 +3,6 @@ import { useQuery } from "react-query";
 import { baseUrl } from "../constants/upApi";
 import { TokenContext } from "../providers/TokenProvider";
 import { TransactionResponse } from "../types/transaction";
-import { queryProps } from "../utils/createQueryProps";
 
 export const useAccount = (id: string) => {
   const { token } = useContext(TokenContext);

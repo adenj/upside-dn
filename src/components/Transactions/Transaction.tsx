@@ -18,7 +18,6 @@ import { MoneyObject } from "../../types/money";
 import { RoundUpObject, TransactionResource } from "../../types/transaction";
 import { deslugify } from "../../utils/deslugify";
 import { formatMoney } from "../../utils/formatMoney";
-import { formatTime } from "../../utils/formatTime";
 import { isNegative } from "../../utils/isNegative";
 import { Link } from "../Link";
 
