@@ -1,6 +1,6 @@
 import { Accordion } from "@chakra-ui/accordion";
 import { useColorModeValue } from "@chakra-ui/color-mode";
-import { Box, Text } from "@chakra-ui/layout";
+import { Box, Stack, Text } from "@chakra-ui/layout";
 import { format } from "date-fns";
 import React from "react";
 import { TransactionResource } from "../../types/transaction";
@@ -11,11 +11,11 @@ export const TransactionList = ({ list }: { list: TransactionResource[] }) => {
   const transactionsDates = groupTransactionsByDate(list);
 
   return (
-    <Box>
+    <Stack spacing={12}>
       {transactionsDates.map(({ date, transactions }) => {
         return <TransactionGroup date={date} transactions={transactions} />;
       })}
-    </Box>
+    </Stack>
   );
 };
 
@@ -24,7 +24,7 @@ const TransactionGroupHeading = ({ date }: { date: string }) => {
   return (
     <Box px="8" py="2" bg={bg} roundedTop="lg" position="sticky" top="0">
       <Text>
-        <strong>{format(new Date(date), "do MMM")}</strong>
+        <strong>{format(new Date(date), "EE, do MMMM ")}</strong>
       </Text>
     </Box>
   );
@@ -32,7 +32,7 @@ const TransactionGroupHeading = ({ date }: { date: string }) => {
 
 const TransactionGroup = ({ transactions, date }: GroupedTransactions) => {
   return (
-    <Box py="6" roundedBottom="lg">
+    <Box roundedBottom="lg">
       <TransactionGroupHeading date={date} />
       <Accordion allowMultiple>
         {transactions.map((transaction) => {

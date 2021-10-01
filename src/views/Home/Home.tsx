@@ -6,7 +6,7 @@ import { useQuery } from "react-query";
 import { TransactionResponse } from "../../types/transaction";
 import { baseUrl } from "../../constants/upApi";
 import { useAccounts } from "../../hooks/useAccounts";
-import { AvailableBalance } from "../../components/AvailableBalance/AvailableBalance";
+import { Balance } from "../../components/Balance/Balance";
 import { queryProps } from "../../utils/createQueryProps";
 import { Loader } from "../../components/Loader/Loader";
 
@@ -29,7 +29,8 @@ export const Home = (props: RouteComponentProps) => {
 
   return (
     <Box>
-      <AvailableBalance
+      <Balance
+        label="Available"
         amount={spendingAccount?.attributes.balance.valueInBaseUnits!}
       />
       <TransactionList list={data?.data!} />

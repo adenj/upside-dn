@@ -1,6 +1,7 @@
-import { Box } from "@chakra-ui/layout";
+import { Box, Heading } from "@chakra-ui/react";
 import { RouteComponentProps } from "@reach/router";
 import React from "react";
+import { Balance } from "../../components/Balance/Balance";
 import { TransactionList } from "../../components/Transactions/TransactionList";
 import { useAccount } from "../../hooks/useAccount";
 import { useAccounts } from "../../hooks/useAccounts";
@@ -18,7 +19,10 @@ export const Saver = ({ id }: SaverProps) => {
   }
   return (
     <Box>
-      <Box>{account?.attributes.displayName}</Box>
+      <Heading textAlign="center" as="h1" size="lg" paddingBottom={4}>
+        {account?.attributes.displayName}
+      </Heading>
+      <Balance amount={account?.attributes.balance.valueInBaseUnits!} />
       <TransactionList list={data?.data!} />
     </Box>
   );

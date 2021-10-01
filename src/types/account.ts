@@ -11,7 +11,7 @@ export interface AccountResponse {
   };
 }
 
-interface AccountResource {
+export interface AccountResource {
   /** The type of this resource: `accounts` */
   type: string;
   /** The unique identifier for this account. */

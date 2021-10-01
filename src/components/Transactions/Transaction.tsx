@@ -9,28 +9,38 @@ import Icon from "@chakra-ui/icon";
 import { Badge, Box, Flex, Grid, GridItem, Text } from "@chakra-ui/layout";
 import { useToken } from "@chakra-ui/system";
 import { Tag, TagLabel, TagLeftIcon } from "@chakra-ui/tag";
+import { format } from "date-fns";
 import React from "react";
 import { AiOutlineUpCircle } from "react-icons/ai";
 import { categories } from "../../constants/categories";
+import { useAccounts } from "../../hooks/useAccounts";
 import { MoneyObject } from "../../types/money";
 import { RoundUpObject, TransactionResource } from "../../types/transaction";
 import { deslugify } from "../../utils/deslugify";
 import { formatMoney } from "../../utils/formatMoney";
 import { formatTime } from "../../utils/formatTime";
 import { isNegative } from "../../utils/isNegative";
+import { Link } from "../Link";
 
 export const Transaction = ({
   transaction,
 }: {
   transaction: TransactionResource;
 }) => {
+  const { data: accountsData } = useAccounts();
   const cardBg = useColorModeValue("blackAlpha.50", "gray.900");
 
   const isNegativeAmount = isNegative(
     transaction.attributes.amount.valueInBaseUnits
   );
-  const time = formatTime(transaction.attributes.createdAt);
+  const date = new Date(transaction.attributes.createdAt);
+  const createdAtTime = format(date, "p").toLowerCase();
   const roundUp = transaction.attributes.roundUp;
+  const internalTransfer = transaction.relationships.transferAccount.data;
+  const accountName = accountsData.data.find(
+    (acc) => acc.id === internalTransfer?.id
+  )?.attributes.displayName;
+
   return (
     <AccordionItem
       borderWidth="1px"
@@ -65,8 +75,7 @@ export const Transaction = ({
             >
               <Text>{transaction.attributes.description}</Text>
               <Text fontSize="xs" color="gray.500">
-                {time.hours}:{time.minutes}
-                {time.ampm}
+                {createdAtTime}
               </Text>
             </Flex>
           </GridItem>
@@ -89,17 +98,31 @@ export const Transaction = ({
       <AccordionPanel bg={cardBg} paddingX={6}>
         <Grid
           gridTemplateColumns="1fr 1fr 1fr 1fr 1fr"
-          gridTemplateRows="repeat(2, 1fr)"
           gridTemplateAreas={`". payment-details payment-details payment-details status" ". category category category category" ". round-up round-up round-up round-up"
           `}
         >
           <GridItem gridArea="payment-details">
             <Text fontSize="sm" paddingBottom="4">
-              Charged September 28, 4:06pm
+              {isNegativeAmount ? "Charged" : "Recieved"}{" "}
+              {`${format(date, "LLLL do")}, ${createdAtTime}`}
             </Text>
             <Text fontSize="sm" as="samp">
               {transaction.attributes.rawText}
             </Text>
+            {internalTransfer && (
+              <GridItem gridArea="round-up">
+                <Text>
+                  Transfered {isNegativeAmount ? "to" : "from"}{" "}
+                  <Link
+                    to={`/savers/${internalTransfer.id}`}
+                    color="brand.orange"
+                    fontWeight="bold"
+                  >
+                    {accountName}
+                  </Link>
+                </Text>
+              </GridItem>
+            )}
           </GridItem>
           <GridItem
             display="grid"
@@ -116,14 +139,14 @@ export const Transaction = ({
               <Category category={transaction.relationships.category} />
             </GridItem>
           ) : null}
-          {roundUp ? (
+          {roundUp && (
             <GridItem gridArea="round-up">
               <RoundUp
                 roundUp={roundUp}
                 amount={transaction.attributes.amount}
               />
             </GridItem>
-          ) : null}
+          )}
         </Grid>
       </AccordionPanel>
     </AccordionItem>
@@ -176,7 +199,7 @@ const RoundUp = ({
       gridTemplateColumns="1fr 1fr 1fr 1fr"
       alignItems="center"
       textAlign="right"
-      paddingTop="4"
+      paddingTop="8"
     >
       <GridItem>
         <Flex alignItems="center">
