@@ -10,6 +10,7 @@ import { useAccounts } from "./hooks/useAccounts";
 import { Loader } from "./components/Loader/Loader";
 import { TokenPrompt } from "./views/TokenPrompt/TokenPrompt";
 import { useToken } from "./hooks/useToken";
+import { Settings } from "./views/Settings/Settings";
 
 export const App = () => {
   const { isLoading, data } = useAccounts();
@@ -25,6 +26,7 @@ export const App = () => {
             <Home path="/" />
             <Savers path="/savers" />
             <Saver path="/savers/:id" />
+            <Settings path="/settings" />
           </Router>
         )}
       </Container>
