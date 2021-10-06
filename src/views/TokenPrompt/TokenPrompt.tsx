@@ -59,12 +59,12 @@ export const TokenPrompt = () => {
       <Box>
         <Text fontWeight="bold">How do I get started?</Text>
         <Text>
-          To get started, you will need to provide your{" "}
+          To get started you will need to provide your{" "}
           <ExternalLink href="https://api.up.com.au/getting_started">
             Up Personal Access Token
           </ExternalLink>
-          to the field below. The token is only store this token on{" "}
-          <strong>your computer</strong>.
+          to the field below. Upside dn will only ever store your token on{" "}
+          <strong>your computer</strong> and nowhere else.
         </Text>
       </Box>
       <Box>
@@ -72,7 +72,8 @@ export const TokenPrompt = () => {
           How can I trust Upside dn with my Personal Access Token?
         </Text>
         <Text>
-          This entire project is open source and free to view and scrutinize on{" "}
+          This entire project is open source and available to view and
+          scrutinize on{" "}
           <ExternalLink href="https://github.com/adenj/upside-dn">
             Github
           </ExternalLink>
