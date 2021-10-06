@@ -21,7 +21,7 @@ export const App = () => {
       <Container>
         {!token && <TokenPrompt />}
         {isLoading && <Loader />}
-        {data && (
+        {data && token && (
           <Router>
             <Home path="/" />
             <Savers path="/savers" />

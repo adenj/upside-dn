@@ -2,6 +2,7 @@ import { Box, Heading } from "@chakra-ui/react";
 import { RouteComponentProps } from "@reach/router";
 import React from "react";
 import { Balance } from "../../components/Balance/Balance";
+import { Loader } from "../../components/Loader/Loader";
 import { TransactionList } from "../../components/Transactions/TransactionList";
 import { useAccount } from "../../hooks/useAccount";
 import { useAccounts } from "../../hooks/useAccounts";
@@ -15,7 +16,7 @@ export const Saver = ({ id }: SaverProps) => {
   const { data: accountsData } = useAccounts();
   const account = accountsData.data.find((acc) => acc.id === id);
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loader />;
   }
   return (
     <Box>

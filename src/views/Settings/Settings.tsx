@@ -1,4 +1,12 @@
-import { Stack, Text, Box, Button, Heading, Flex } from "@chakra-ui/react";
+import {
+  Stack,
+  Text,
+  Box,
+  Button,
+  Heading,
+  Flex,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import { RouteComponentProps } from "@reach/router";
 import React from "react";
 import { ColorModeToggle } from "../../components/ColorModeToggle/ColorModeToggle";
@@ -6,11 +14,18 @@ import { useToken } from "../../hooks/useToken";
 
 export const Settings = (props: RouteComponentProps) => {
   const { setToken } = useToken();
+  const bgColor = useColorModeValue("gray.50", "gray.900");
   return (
     <Box>
       <Heading textAlign="center">Settings</Heading>
-      <Stack spacing={8} background="gray.900" padding={6} borderRadius="lg">
-        <Flex alignItems="center" justifyContent="space-between" paddingTop={6}>
+      <Stack
+        spacing={8}
+        background={bgColor}
+        padding={6}
+        borderRadius="lg"
+        marginTop={6}
+      >
+        <Flex alignItems="center" justifyContent="space-between">
           <Stack spacing={2} flexBasis="60%">
             <Text fontSize="lg" fontWeight="bold">
               Color mode

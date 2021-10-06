@@ -13,13 +13,13 @@ export const Nav = () => {
     <Box as="nav" paddingY="4">
       <Container>
         {token ? (
-          <Grid templateColumns="3fr 2fr 2fr 2fr 2fr" alignItems="center">
+          <Grid templateColumns="3fr 2fr 2fr 2fr" alignItems="center">
             <GridItem>
               <Logo />
             </GridItem>
             <NavItem label="Home" path="/" />
             <NavItem label="Savers" path="/savers" />
-            <NavItem label="Help" path="/help" />
+            {/* <NavItem label="Help" path="/help" /> */}
             <NavItem label="Settings" path="/settings" />
           </Grid>
         ) : (

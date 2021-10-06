@@ -9,8 +9,12 @@ import {
   AccordionPanel,
   Code,
   AccordionIcon,
+  Heading,
+  Stack,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
+import { HiExternalLink } from "react-icons/hi";
+import { ExternalLink } from "../../components/ExternalLink/ExternalLink";
 import { useToken } from "../../hooks/useToken";
 
 const tokenFormat =
@@ -37,11 +41,47 @@ export const TokenPrompt = () => {
   };
 
   return (
-    <Box>
-      <Text>To continue, we will need your Up Personal Access token</Text>
-      <Text>How do I get it?</Text>
-      <form onSubmit={onSubmit}>
+    <Stack spacing={6}>
+      <Box>
+        <Heading size="lg" paddingTop={6}>
+          Welcome to Upside dn
+        </Heading>
+
+        <Text>The unofficial, open-source web app for Up banking</Text>
+      </Box>
+      <Box>
+        <Text fontWeight="bold">How does Upside dn work?</Text>
+        <Text>
+          Upside dn utilises the{" "}
+          <ExternalLink href="https://api.up.com.au">Up Bank API</ExternalLink>{" "}
+          to make secure requests for your data in the browser.
+        </Text>
+      </Box>
+      <Box>
+        <Text fontWeight="bold">How do I get started?</Text>
+        <Text>
+          To get started, you will need to provide your{" "}
+          <ExternalLink href="https://api.up.com.au/getting_started">
+            Up Personal Access Token
+          </ExternalLink>
+          to the field below. The token is only store this token on{" "}
+          <strong>your computer</strong>.
+        </Text>
+      </Box>
+      <Box>
+        <Text fontWeight="bold">
+          How can I trust Upside dn with my Personal Access Token?
+        </Text>
+        <Text>
+          This entire project is open source and free to view and scrutinize on{" "}
+          <ExternalLink href="https://github.com/adenj/upside-dn">
+            Github
+          </ExternalLink>
+        </Text>
+      </Box>
+      <Box as="form" onSubmit={onSubmit}>
         <Textarea
+          placeholder="up:yeah:fdvslkjLKJ"
           isInvalid={state.error}
           value={tokenValue}
           onChange={(e) => {
@@ -66,8 +106,10 @@ export const TokenPrompt = () => {
             </Accordion>
           </>
         ) : null}
-        <Button type="submit">Submit</Button>
-      </form>
-    </Box>
+        <Button type="submit" marginTop={4}>
+          Save
+        </Button>
+      </Box>
+    </Stack>
   );
 };
