@@ -8,9 +8,10 @@ import React from "react";
 import { Link as ReachLink } from "@reach/router";
 import { AccountResource } from "../../types/account";
 import { formatMoney } from "../../utils/formatMoney";
+import { background } from "../../constants/colorModes";
 
 export const Saver = ({ account }: { account: AccountResource }) => {
-  const hoverBgColor = useColorModeValue("gray.50", "gray.900");
+  const hoverBgColor = useColorModeValue(background.light, background.dark);
   return (
     <LinkBox
       as="div"

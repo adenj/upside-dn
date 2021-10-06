@@ -11,6 +11,7 @@ import { Loader } from "./components/Loader/Loader";
 import { TokenPrompt } from "./views/TokenPrompt/TokenPrompt";
 import { useToken } from "./hooks/useToken";
 import { Settings } from "./views/Settings/Settings";
+import { Footer } from "./components/Footer/Footer";
 
 export const App = () => {
   const { isLoading, data } = useAccounts();
@@ -30,6 +31,7 @@ export const App = () => {
           </Router>
         )}
       </Container>
+      <Footer />
     </ChakraProvider>
   );
 };

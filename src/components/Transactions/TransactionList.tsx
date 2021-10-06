@@ -1,13 +1,21 @@
-import { Accordion } from "@chakra-ui/accordion";
-import { useColorModeValue } from "@chakra-ui/color-mode";
-import { Box, Stack, Text } from "@chakra-ui/layout";
+import {
+  Accordion,
+  Box,
+  Stack,
+  Text,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import { format } from "date-fns";
 import React from "react";
 import { TransactionResource } from "../../types/transaction";
 import { groupTransactionsByDate } from "../../utils/groupTransactionsByDate";
 import { Transaction } from "./Transaction";
 
-export const TransactionList = ({ list }: { list: TransactionResource[] }) => {
+interface TransactionListProps {
+  list: TransactionResource[];
+}
+
+export const TransactionList = ({ list }: TransactionListProps) => {
   const transactionsDates = groupTransactionsByDate(list);
 
   return (

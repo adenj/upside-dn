@@ -7,14 +7,22 @@ import {
   Flex,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { RouteComponentProps } from "@reach/router";
+import { RouteComponentProps, useNavigate } from "@reach/router";
 import React from "react";
 import { ColorModeToggle } from "../../components/ColorModeToggle/ColorModeToggle";
+import { background } from "../../constants/colorModes";
 import { useToken } from "../../hooks/useToken";
 
 export const Settings = (props: RouteComponentProps) => {
   const { setToken } = useToken();
-  const bgColor = useColorModeValue("gray.50", "gray.900");
+  const navigate = useNavigate();
+  const bgColor = useColorModeValue(background.light, background.dark);
+
+  const revokeToken = () => {
+    setToken(null);
+    navigate("/");
+  };
+
   return (
     <Box>
       <Heading textAlign="center">Settings</Heading>
@@ -47,7 +55,7 @@ export const Settings = (props: RouteComponentProps) => {
               token
             </Text>
           </Stack>
-          <Button colorScheme="red" onClick={() => setToken(null)}>
+          <Button colorScheme="red" onClick={revokeToken}>
             Revoke access
           </Button>
         </Flex>
