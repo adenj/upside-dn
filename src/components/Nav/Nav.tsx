@@ -1,7 +1,6 @@
 import { Box, Text, Grid, Flex } from "@chakra-ui/layout";
 import React from "react";
 import { Container, GridItem } from "@chakra-ui/react";
-import { ColorModeToggle } from "../ColorModeToggle/ColorModeToggle";
 import { Link } from "../Link";
 import { Logo } from "../Logo/Logo";
 import { useLocation } from "@reach/router";

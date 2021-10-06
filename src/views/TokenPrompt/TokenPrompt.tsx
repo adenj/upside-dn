@@ -13,7 +13,6 @@ import {
   Stack,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
-import { HiExternalLink } from "react-icons/hi";
 import { ExternalLink } from "../../components/ExternalLink/ExternalLink";
 import { useToken } from "../../hooks/useToken";
 
