@@ -12,6 +12,7 @@ import {
   Heading,
   Stack,
 } from "@chakra-ui/react";
+import { useNavigate } from "@reach/router";
 import React, { useState } from "react";
 import { ExternalLink } from "../../components/ExternalLink/ExternalLink";
 import { useToken } from "../../hooks/useToken";
@@ -25,6 +26,7 @@ export const TokenPrompt = () => {
   const { setToken } = useToken();
   const [tokenValue, setTokenValue] = useState("");
   const [state, setState] = useState(initialState);
+  const navigate = useNavigate();
 
   const onSubmit = (e: any) => {
     e.preventDefault();
@@ -51,7 +53,7 @@ export const TokenPrompt = () => {
       <Box>
         <Text fontWeight="bold">How does Upside dn work?</Text>
         <Text>
-          Upside dn utilises the{" "}
+          <strong>Upside dn</strong> utilises the{" "}
           <ExternalLink href="https://api.up.com.au">Up Bank API</ExternalLink>{" "}
           to make secure requests for your data in the browser.
         </Text>

@@ -5,5 +5,9 @@ import React from "react";
 export const ColorModeToggle = () => {
   const { colorMode, toggleColorMode } = useColorMode();
   const label = colorMode === "light" ? "Go dark" : "Go light";
-  return <Button onClick={toggleColorMode}>{label}</Button>;
+  return (
+    <Button variant="outline" colorScheme="black" onClick={toggleColorMode}>
+      {label}
+    </Button>
+  );
 };

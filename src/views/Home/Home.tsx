@@ -1,31 +1,28 @@
-import { Box } from "@chakra-ui/layout";
+import { Box, Button } from "@chakra-ui/react";
 import React from "react";
 import { RouteComponentProps } from "@reach/router";
 import { TransactionList } from "../../components/Transactions/TransactionList";
-import { useQuery } from "react-query";
-import { TransactionResponse } from "../../types/transaction";
 import { baseUrl } from "../../constants/upApi";
 import { useAccounts } from "../../hooks/useAccounts";
-import { useToken } from "../../hooks/useToken";
 import { Balance } from "../../components/Balance/Balance";
-import { createQueryProps } from "../../utils/createQueryProps";
 import { Loader } from "../../components/Loader/Loader";
+import { useTransactionQuery } from "../../hooks/useTransactionQuery";
+import { makeQueryPath } from "../../utils/makeQueryPath";
+import { LoadMoreButton } from "../../components/LoadMoreButton/LoadMoreButton";
 
 export const Home = (props: RouteComponentProps) => {
   const { data: accounts } = useAccounts();
-  const { token } = useToken();
-  const spendingAccount = accounts.data.find(
+  const account = accounts.data.find(
     (acc) => acc.attributes.displayName === "Spending"
   );
-  const { data, isLoading } = useQuery<TransactionResponse>(
-    "transactions",
-    async () => {
-      return await fetch(
-        `${baseUrl}/accounts/${spendingAccount?.id}/transactions?page[size]=30`,
-        createQueryProps(token)
-      ).then((res) => res.json());
-    }
-  );
+
+  const {
+    data,
+    isLoading,
+    fetchNextPage,
+    isFetchingNextPage,
+    hasNextPage,
+  } = useTransactionQuery(account?.id!);
 
   if (isLoading) return <Loader />;
 
@@ -33,9 +30,14 @@ export const Home = (props: RouteComponentProps) => {
     <Box>
       <Balance
         label="Available"
-        amount={spendingAccount?.attributes.balance.valueInBaseUnits!}
+        amount={account?.attributes.balance.valueInBaseUnits!}
       />
-      <TransactionList list={data?.data!} />
+      <TransactionList list={data!} />
+      <LoadMoreButton
+        fetchNextPage={fetchNextPage}
+        isFetchingNextPage={isFetchingNextPage}
+        hasNextPage={hasNextPage!}
+      />
     </Box>
   );
 };

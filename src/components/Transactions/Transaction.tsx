@@ -13,6 +13,7 @@ import { format } from "date-fns";
 import React from "react";
 import { AiOutlineUpCircle } from "react-icons/ai";
 import { categories } from "../../constants/categories";
+import { background } from "../../constants/colorModes";
 import { useAccounts } from "../../hooks/useAccounts";
 import { MoneyObject } from "../../types/money";
 import { RoundUpObject, TransactionResource } from "../../types/transaction";
@@ -27,7 +28,7 @@ export const Transaction = ({
   transaction: TransactionResource;
 }) => {
   const { data: accountsData } = useAccounts();
-  const cardBg = useColorModeValue("blackAlpha.50", "gray.900");
+  const cardBg = useColorModeValue(background.light, background.dark);
 
   const isNegativeAmount = isNegative(
     transaction.attributes.amount.valueInBaseUnits
