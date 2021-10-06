@@ -6,11 +6,15 @@ import React, {
   useEffect,
   useState,
 } from "react";
-import { getTokenLocalStorage, setTokenLocalStorage } from "../constants/token";
+import {
+  deleteTokenLocalStorage,
+  getTokenLocalStorage,
+  setTokenLocalStorage,
+} from "../constants/token";
 
 interface Context {
-  token: string;
-  setToken: Dispatch<SetStateAction<string>>;
+  token: string | null;
+  setToken: Dispatch<SetStateAction<string | null>>;
 }
 
 export const TokenContext = createContext<Context>(null!);
@@ -19,6 +23,9 @@ export const TokenProvider = ({ children }: { children: ReactNode }) => {
   const [token, setToken] = useState(getTokenLocalStorage!);
 
   useEffect(() => {
+    if (token === null) {
+      deleteTokenLocalStorage();
+    }
     if (!token) {
       return;
     }

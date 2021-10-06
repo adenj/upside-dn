@@ -1,10 +1,16 @@
-import { LinkBox, LinkOverlay, Text } from "@chakra-ui/react";
+import {
+  LinkBox,
+  LinkOverlay,
+  Text,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import React from "react";
 import { Link as ReachLink } from "@reach/router";
 import { AccountResource } from "../../types/account";
 import { formatMoney } from "../../utils/formatMoney";
 
 export const Saver = ({ account }: { account: AccountResource }) => {
+  const hoverBgColor = useColorModeValue("gray.50", "gray.900");
   return (
     <LinkBox
       as="div"
@@ -16,7 +22,7 @@ export const Saver = ({ account }: { account: AccountResource }) => {
       justifyContent="space-between"
       alignItems="center"
       _hover={{
-        bg: "gray.900",
+        bg: hoverBgColor,
       }}
     >
       <LinkOverlay to={`/savers/${account.id}`} as={ReachLink}>
