@@ -1,13 +1,11 @@
-import { Box, Button } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import React from "react";
 import { RouteComponentProps } from "@reach/router";
 import { TransactionList } from "../../components/Transactions/TransactionList";
-import { baseUrl } from "../../constants/upApi";
 import { useAccounts } from "../../hooks/useAccounts";
 import { Balance } from "../../components/Balance/Balance";
 import { Loader } from "../../components/Loader/Loader";
 import { useTransactionQuery } from "../../hooks/useTransactionQuery";
-import { makeQueryPath } from "../../utils/makeQueryPath";
 import { LoadMoreButton } from "../../components/LoadMoreButton/LoadMoreButton";
 
 export const Home = (props: RouteComponentProps) => {

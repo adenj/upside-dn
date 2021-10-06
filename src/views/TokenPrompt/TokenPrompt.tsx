@@ -12,7 +12,6 @@ import {
   Heading,
   Stack,
 } from "@chakra-ui/react";
-import { useNavigate } from "@reach/router";
 import React, { useState } from "react";
 import { ExternalLink } from "../../components/ExternalLink/ExternalLink";
 import { useToken } from "../../hooks/useToken";
@@ -26,7 +25,6 @@ export const TokenPrompt = () => {
   const { setToken } = useToken();
   const [tokenValue, setTokenValue] = useState("");
   const [state, setState] = useState(initialState);
-  const navigate = useNavigate();
 
   const onSubmit = (e: any) => {
     e.preventDefault();
