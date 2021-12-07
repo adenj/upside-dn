@@ -3,7 +3,7 @@ import {
   Link as ChakraLink,
   LinkProps as ChakraLinkProps,
 } from "@chakra-ui/react";
-import { Link as ReachLink } from "@reach/router";
+import { Link as ReactRouterLink } from "react-router-dom";
 
 interface LinkProps {
   to: string;
@@ -13,7 +13,12 @@ interface LinkProps {
 }
 
 export const Link = ({ children, to, color, fontWeight }: LinkProps) => (
-  <ChakraLink as={ReachLink} to={to} color={color} fontWeight={fontWeight}>
+  <ChakraLink
+    as={ReactRouterLink}
+    to={to}
+    color={color}
+    fontWeight={fontWeight}
+  >
     {children}
   </ChakraLink>
 );
