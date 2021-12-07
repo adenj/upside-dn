@@ -7,13 +7,13 @@ import {
   Flex,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { RouteComponentProps, useNavigate } from "@reach/router";
+import { useNavigate } from "react-router-dom";
 import React from "react";
 import { ColorModeToggle } from "../../components/ColorModeToggle/ColorModeToggle";
 import { background } from "../../constants/colorModes";
 import { useToken } from "../../hooks/useToken";
 
-export const Settings = (props: RouteComponentProps) => {
+export const Settings = () => {
   const { setToken } = useToken();
   const navigate = useNavigate();
   const bgColor = useColorModeValue(background.light, background.dark);

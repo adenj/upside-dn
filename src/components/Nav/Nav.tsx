@@ -3,7 +3,7 @@ import React from "react";
 import { Container, GridItem } from "@chakra-ui/react";
 import { Link } from "../Link";
 import { Logo } from "../Logo/Logo";
-import { useLocation } from "@reach/router";
+import { useLocation } from "react-router-dom";
 import { useToken } from "../../hooks/useToken";
 
 export const Nav = () => {

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { ChakraProvider, Container } from "@chakra-ui/react";
-import { Router } from "@reach/router";
+import { Routes, Route } from "react-router-dom";
 import { theme } from "./theme/theme";
 import { Home } from "./views/Home/Home";
 import { Nav } from "./components/Nav/Nav";
@@ -23,12 +23,12 @@ export const App = () => {
         {!token && <TokenPrompt />}
         {isLoading && <Loader />}
         {data && token && (
-          <Router>
-            <Home path="/" />
-            <Savers path="/savers" />
-            <Saver path="/savers/:id" />
-            <Settings path="/settings" />
-          </Router>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/savers" element={<Savers />} />
+            <Route path="/savers/:id" element={<Saver />} />
+            <Route path="/settings" element={<Settings />} />
+          </Routes>
         )}
       </Container>
       <Footer />

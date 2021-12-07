@@ -1,5 +1,5 @@
 import { ColorModeScript } from "@chakra-ui/react";
-import { LocationProvider } from "@reach/router";
+import { BrowserRouter } from "react-router-dom";
 import * as React from "react";
 import ReactDOM from "react-dom";
 
@@ -13,7 +13,7 @@ import * as serviceWorker from "./serviceWorker";
 ReactDOM.render(
   <React.StrictMode>
     <ColorModeScript initialColorMode="dark" />
-    <LocationProvider>
+    <BrowserRouter>
       <QueryProvider>
         <TokenProvider>
           <AccountsProvider>
@@ -21,7 +21,7 @@ ReactDOM.render(
           </AccountsProvider>
         </TokenProvider>
       </QueryProvider>
-    </LocationProvider>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")
 );
