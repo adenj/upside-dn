@@ -20,7 +20,7 @@ export const AccountsProvider = ({ children }: { children: ReactNode }) => {
     async () => {
       return await fetch(
         `${baseUrl}/accounts?page[size]=30`,
-        createQueryProps(token)
+        createQueryProps(token!)
       ).then((res) => res.json());
     },
     {

@@ -1,5 +1,5 @@
 import { ColorModeScript } from "@chakra-ui/react";
-import { LocationProvider } from "@reach/router";
+import { BrowserRouter } from "react-router-dom";
 import * as React from "react";
 import ReactDOM from "react-dom";
 
@@ -9,19 +9,22 @@ import { QueryProvider } from "./providers/QueryProvider";
 import { TokenProvider } from "./providers/TokenProvider";
 import reportWebVitals from "./reportWebVitals";
 import * as serviceWorker from "./serviceWorker";
+import { AuthProvider } from "./providers/AuthProvider";
 
 ReactDOM.render(
   <React.StrictMode>
     <ColorModeScript initialColorMode="dark" />
-    <LocationProvider>
-      <QueryProvider>
-        <TokenProvider>
-          <AccountsProvider>
-            <App />
-          </AccountsProvider>
-        </TokenProvider>
-      </QueryProvider>
-    </LocationProvider>
+    <BrowserRouter>
+      <AuthProvider>
+        <QueryProvider>
+          <TokenProvider>
+            <AccountsProvider>
+              <App />
+            </AccountsProvider>
+          </TokenProvider>
+        </QueryProvider>
+      </AuthProvider>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")
 );

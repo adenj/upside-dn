@@ -1,11 +1,10 @@
 import { Box, Stack, Text } from "@chakra-ui/layout";
-import { RouteComponentProps } from "@reach/router";
 import React from "react";
 import { useAccounts } from "../../hooks/useAccounts";
 import { Saver } from "../../components/Saver/Saver";
 import { Balance } from "../../components/Balance/Balance";
 
-export const Savers = (props: RouteComponentProps) => {
+export const Savers = () => {
   const { data, isLoading } = useAccounts();
   if (isLoading) {
     return <Text>Loading...</Text>;

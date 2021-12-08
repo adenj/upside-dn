@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { ChakraProvider, Container } from "@chakra-ui/react";
-import { Router } from "@reach/router";
+import React, { ReactNode, useEffect, useState, ReactElement } from "react";
+import { ChakraProvider, Container, Button } from "@chakra-ui/react";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { theme } from "./theme/theme";
 import { Home } from "./views/Home/Home";
 import { Nav } from "./components/Nav/Nav";
@@ -15,20 +15,22 @@ import { Footer } from "./components/Footer/Footer";
 import { Auth } from "./views/Auth/auth";
 import { supabase } from "./supabaseClient";
 import { Session } from "@supabase/gotrue-js";
+import { useSession } from "./hooks/useSession";
+
+const ProtectedRoute = ({ element }: { element: ReactElement }) => {
+  const { session } = useSession();
+
+  if (!session) {
+    return <Navigate to="/" />;
+  }
+
+  return element;
+};
 
 export const App = () => {
   const { isLoading, data } = useAccounts();
   const { token } = useToken();
-
-  const [session, setSession] = useState<null | Session>(null);
-
-  useEffect(() => {
-    setSession(supabase.auth.session());
-
-    supabase.auth.onAuthStateChange((_, sess) => {
-      setSession(sess);
-    });
-  }, []);
+  const { session } = useSession();
 
   return (
     <ChakraProvider theme={theme}>
@@ -38,13 +40,28 @@ export const App = () => {
         {!token && <TokenPrompt />}
         {isLoading && <Loader />}
         {data && token && (
-          <Router>
-            <Home path="/feed" />
-            <Savers path="/savers" />
-            <Saver path="/savers/:id" />
-            <Settings path="/settings" />
-            <Auth path="/" />
-          </Router>
+          <Routes>
+            <Route
+              path="/"
+              element={!session ? <Auth /> : <Navigate to="/feed" />}
+            />
+            <Route
+              path="/feed"
+              element={<ProtectedRoute element={<Home />} />}
+            />
+            <Route
+              path="/savers"
+              element={<ProtectedRoute element={<Savers />} />}
+            />
+            <Route
+              path="/savers/:id"
+              element={<ProtectedRoute element={<Saver />} />}
+            />
+            <Route
+              path="/settings"
+              element={<ProtectedRoute element={<Settings />} />}
+            />
+          </Routes>
         )}
       </Container>
       <Footer />

@@ -5,7 +5,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import React from "react";
-import { Link as ReachLink } from "@reach/router";
+import { Link as ReactRouterLink } from "react-router-dom";
 import { AccountResource } from "../../types/account";
 import { formatMoney } from "../../utils/formatMoney";
 import { background } from "../../constants/colorModes";
@@ -26,7 +26,7 @@ export const Saver = ({ account }: { account: AccountResource }) => {
         bg: hoverBgColor,
       }}
     >
-      <LinkOverlay to={`/savers/${account.id}`} as={ReachLink}>
+      <LinkOverlay to={`/savers/${account.id}`} as={ReactRouterLink}>
         <Text fontSize="lg" fontWeight="bold">
           {account.attributes.displayName}
         </Text>

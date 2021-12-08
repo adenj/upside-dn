@@ -1,13 +1,16 @@
 import { Box, Text, Grid, Flex } from "@chakra-ui/layout";
 import React from "react";
 import { Container, GridItem } from "@chakra-ui/react";
+import {} from "react-router-dom";
 import { Link } from "../Link";
 import { Logo } from "../Logo/Logo";
-import { useLocation } from "@reach/router";
+import { useLocation } from "react-router-dom";
 import { useToken } from "../../hooks/useToken";
+import { useSession } from "../../hooks/useSession";
 
 export const Nav = () => {
   const { token } = useToken();
+  const { session } = useSession();
   return (
     <Box as="nav" paddingY="4">
       <Container>
@@ -16,10 +19,13 @@ export const Nav = () => {
             <GridItem>
               <Logo />
             </GridItem>
-            <NavItem label="Home" path="/" />
-            <NavItem label="Savers" path="/savers" />
-            {/* <NavItem label="Help" path="/help" /> */}
-            <NavItem label="Settings" path="/settings" />
+            {session ? (
+              <>
+                <NavItem label="Feed" path="/feed" />
+                <NavItem label="Savers" path="/savers" />
+                <NavItem label="Settings" path="/settings" />
+              </>
+            ) : null}
           </Grid>
         ) : (
           <Flex alignItems="center" justifyContent="space-between">

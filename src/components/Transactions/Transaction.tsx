@@ -2,11 +2,31 @@ import {
   AccordionButton,
   AccordionItem,
   AccordionPanel,
-} from "@chakra-ui/accordion";
-import { Avatar } from "@chakra-ui/avatar";
-import { useColorModeValue } from "@chakra-ui/color-mode";
-import Icon from "@chakra-ui/icon";
-import { Badge, Box, Flex, Grid, GridItem, Text } from "@chakra-ui/layout";
+  Button,
+  Avatar,
+  useColorModeValue,
+  Icon,
+  Badge,
+  Box,
+  Flex,
+  Grid,
+  GridItem,
+  Text,
+  useDisclosure,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalCloseButton,
+  ModalBody,
+  ModalFooter,
+  ModalProps,
+  FormControl,
+  FormLabel,
+  Input,
+  InputLeftElement,
+  InputGroup,
+} from "@chakra-ui/react";
 import { useToken } from "@chakra-ui/system";
 import { Tag, TagLabel, TagLeftIcon } from "@chakra-ui/tag";
 import { format } from "date-fns";
@@ -29,6 +49,7 @@ export const Transaction = ({
 }) => {
   const { data: accountsData } = useAccounts();
   const cardBg = useColorModeValue(background.light, background.dark);
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const isNegativeAmount = isNegative(
     transaction.attributes.amount.valueInBaseUnits
@@ -40,6 +61,27 @@ export const Transaction = ({
   const accountName = accountsData.data.find(
     (acc) => acc.id === internalTransfer?.id
   )?.attributes.displayName;
+
+  // const testFn = async () => {
+  //   try {
+  //     const user = supabase.auth.user();
+  //     const data = {
+  //       user_id: user!.id,
+  //       title: "Internet bill",
+  //       amount: 5000,
+  //       created_at: new Date(),
+  //     };
+
+  //     const { error } = await supabase
+  //       .from("expenses")
+  //       .upsert(data, { returning: "minimal" });
+  //     if (error) {
+  //       throw error;
+  //     }
+  //   } catch (error) {
+  //     alert(error.message);
+  //   }
+  // };
 
   return (
     <AccordionItem
@@ -148,6 +190,12 @@ export const Transaction = ({
             </GridItem>
           )}
         </Grid>
+        <Button onClick={onOpen}>Expense</Button>
+        <ExpenseModal
+          isOpen={isOpen}
+          onClose={onClose}
+          transaction={transaction}
+        />
       </AccordionPanel>
     </AccordionItem>
   );
@@ -236,5 +284,40 @@ const RoundUp = ({
         </Text>
       </GridItem>
     </Grid>
+  );
+};
+
+interface ExpenseModalProps {
+  isOpen: ModalProps["isOpen"];
+  onClose: ModalProps["onClose"];
+  transaction: TransactionResource;
+}
+
+const ExpenseModal = ({ isOpen, onClose, transaction }: ExpenseModalProps) => {
+  return (
+    <Modal isOpen={isOpen} onClose={onClose} isCentered>
+      <ModalOverlay />
+      <ModalContent>
+        <ModalHeader>Modal Title</ModalHeader>
+        <ModalCloseButton />
+        <ModalBody>
+          {/* <pre>{JSON.stringify(transaction, null, 2)}</pre> */}
+          <FormControl isInvalid={true}>
+            <FormLabel>Amount</FormLabel>
+            <InputGroup>
+              <InputLeftElement children="$" />
+              <Input placeholder="Amount" />
+            </InputGroup>
+          </FormControl>
+        </ModalBody>
+
+        <ModalFooter>
+          <Button colorScheme="blue" mr={3} onClick={onClose}>
+            Close
+          </Button>
+          <Button variant="ghost">Secondary Action</Button>
+        </ModalFooter>
+      </ModalContent>
+    </Modal>
   );
 };
