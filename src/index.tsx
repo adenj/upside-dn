@@ -11,6 +11,8 @@ import reportWebVitals from "./reportWebVitals";
 import * as serviceWorker from "./serviceWorker";
 import { AuthProvider } from "./providers/AuthProvider";
 
+import "react-datepicker/dist/react-datepicker.css";
+
 ReactDOM.render(
   <React.StrictMode>
     <ColorModeScript initialColorMode="dark" />

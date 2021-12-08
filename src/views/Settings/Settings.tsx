@@ -19,6 +19,7 @@ export const Settings = () => {
   const bgColor = useColorModeValue(background.light, background.dark);
 
   const revokeToken = () => {
+    // @ts-ignore
     setToken(null);
     navigate("/");
   };

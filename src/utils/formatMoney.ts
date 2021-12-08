@@ -6,5 +6,9 @@ const formatter = new Intl.NumberFormat("en-AU", {
 });
 
 export const formatMoney = (cents: number) => {
-  return formatter.format(cents / 100);
+  return formatter.format(formatBaseValue(cents));
+};
+
+export const formatBaseValue = (cents: number) => {
+  return cents / 100;
 };
