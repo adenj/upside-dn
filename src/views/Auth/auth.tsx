@@ -1,5 +1,9 @@
+import { Tabs, TabList, Tab, TabPanels, TabPanel } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { supabase } from "../../supabaseClient";
+import { AuthForm } from "./AuthForm";
+import { LoginForm } from "./LoginForm";
+import { SignUpFormForm } from "./SignUpForm";
 
 export const Auth = () => {
   const [loading, setLoading] = useState(false);
@@ -21,23 +25,19 @@ export const Auth = () => {
   };
 
   return (
-    <div>
-      <h1>Sign in</h1>
-      <input
-        type="email"
-        placeholder="Your email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <button
-        disabled={loading}
-        onClick={(e) => {
-          e.preventDefault();
-          handleLogin(email);
-        }}
-      >
-        {loading ? "Loading..." : "Send magic link"}
-      </button>
-    </div>
+    <Tabs isFitted variant="enclosed">
+      <TabList mb="1em">
+        <Tab>Log in</Tab>
+        <Tab>Sign up</Tab>
+      </TabList>
+      <TabPanels>
+        <TabPanel>
+          <AuthForm method="login" />
+        </TabPanel>
+        <TabPanel>
+          <AuthForm method="register" />
+        </TabPanel>
+      </TabPanels>
+    </Tabs>
   );
 };

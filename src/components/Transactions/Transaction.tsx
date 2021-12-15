@@ -14,33 +14,7 @@ import {
   GridItem,
   Text,
   useDisclosure,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalCloseButton,
-  ModalBody,
-  ModalFooter,
-  ModalProps,
-  FormControl,
-  FormLabel,
-  Input,
-  InputLeftElement,
-  InputGroup,
-  Textarea,
-  Select,
-  Switch,
-  NumberInput,
-  NumberInputField,
-  NumberInputStepper,
-  NumberIncrementStepper,
-  NumberDecrementStepper,
-  Slider,
-  SliderTrack,
-  SliderFilledTrack,
-  SliderThumb,
 } from "@chakra-ui/react";
-import { SingleDatepicker } from "chakra-dayzed-datepicker";
 import { useToken } from "@chakra-ui/system";
 import { Tag, TagLabel, TagLeftIcon } from "@chakra-ui/tag";
 import { format } from "date-fns";
@@ -52,10 +26,10 @@ import { useAccounts } from "../../hooks/useAccounts";
 import { MoneyObject } from "../../types/money";
 import { RoundUpObject, TransactionResource } from "../../types/transaction";
 import { deslugify } from "../../utils/deslugify";
-import { formatBaseValue, formatMoney } from "../../utils/formatMoney";
+import { formatMoney } from "../../utils/formatMoney";
 import { isNegative } from "../../utils/isNegative";
 import { Link } from "../Link";
-import { expenseTypes } from "../../constants/expenseTypes";
+import { ExpenseModal } from "../ExpenseModal/ExpenseModal";
 
 export const Transaction = ({
   transaction,
@@ -76,27 +50,6 @@ export const Transaction = ({
   const accountName = accountsData.data.find(
     (acc) => acc.id === internalTransfer?.id
   )?.attributes.displayName;
-
-  // const testFn = async () => {
-  //   try {
-  //     const user = supabase.auth.user();
-  //     const data = {
-  //       user_id: user!.id,
-  //       title: "Internet bill",
-  //       amount: 5000,
-  //       created_at: new Date(),
-  //     };
-
-  //     const { error } = await supabase
-  //       .from("expenses")
-  //       .upsert(data, { returning: "minimal" });
-  //     if (error) {
-  //       throw error;
-  //     }
-  //   } catch (error) {
-  //     alert(error.message);
-  //   }
-  // };
 
   return (
     <AccordionItem
@@ -299,153 +252,5 @@ const RoundUp = ({
         </Text>
       </GridItem>
     </Grid>
-  );
-};
-
-interface ExpenseModalProps {
-  isOpen: ModalProps["isOpen"];
-  onClose: ModalProps["onClose"];
-  transaction: TransactionResource;
-}
-
-const ExpenseModal = ({ isOpen, onClose, transaction }: ExpenseModalProps) => {
-  const [vendor, setVendor] = useState(transaction.attributes.description);
-  const [description, setDescription] = useState(
-    transaction.attributes.rawText || ""
-  );
-  const [amount, setAmount] = useState(
-    formatBaseValue(transaction.attributes.amount.valueInBaseUnits)
-  );
-  const [date, setDate] = useState(new Date(transaction.attributes.createdAt));
-  const [type, setType] = useState("");
-  const [fullyClaimable, setFullyClaimable] = useState(true);
-  const [claimableAmount, setClaimableAmount] = useState({
-    percent: 100,
-    amount,
-  });
-
-  const updateClaimableAmount = (value: number) => {
-    const newAmount = amount * (value / 100);
-    const percent = Number(value);
-    setClaimableAmount({ amount: newAmount, percent });
-  };
-
-  console.log(transaction);
-  return (
-    <Modal isOpen={isOpen} onClose={onClose} isCentered>
-      <ModalOverlay />
-      <ModalContent>
-        <ModalHeader>New Expense</ModalHeader>
-        <ModalCloseButton />
-        <ModalBody>
-          <FormControl>
-            <FormLabel>Vendor</FormLabel>
-            <InputGroup>
-              <Input
-                placeholder="Vendor"
-                value={vendor}
-                onChange={(e) => setVendor(e.target.value)}
-              />
-            </InputGroup>
-          </FormControl>
-          <FormControl>
-            <FormLabel>Total Amount</FormLabel>
-            <InputGroup>
-              <InputLeftElement children="$" />
-              <Input
-                placeholder="Total Amount"
-                value={amount}
-                onChange={(e) => setAmount(Number(e.target.value))}
-              />
-            </InputGroup>
-          </FormControl>
-
-          <FormControl>
-            <FormLabel>Transaction date</FormLabel>
-            <InputGroup>
-              <SingleDatepicker
-                date={date}
-                onDateChange={(e) => {
-                  setDate(new Date(e));
-                }}
-              />
-            </InputGroup>
-          </FormControl>
-
-          <FormControl>
-            <FormLabel>Expense type</FormLabel>
-            <Select
-              placeholder="Select expense type"
-              value={type}
-              onChange={(e) => setType(e.target.value)}
-            >
-              {expenseTypes.map((type) => (
-                <option value={type.value}>{type.label}</option>
-              ))}
-            </Select>
-          </FormControl>
-
-          <FormControl>
-            <FormLabel>Description</FormLabel>
-            <InputGroup>
-              <Textarea
-                placeholder="Description"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-              />
-            </InputGroup>
-          </FormControl>
-          <FormControl display="flex" alignItems="center">
-            <FormLabel htmlFor="100%-claimable" mb="0">
-              Is this expense 100% claimable?
-            </FormLabel>
-            <Switch
-              id="100%-claimable"
-              size="lg"
-              isChecked={fullyClaimable}
-              onChange={(e) => setFullyClaimable(e.target.checked)}
-            />
-          </FormControl>
-          {!fullyClaimable && (
-            <Flex>
-              <NumberInput
-                maxWidth="100px"
-                mr="2rem"
-                value={claimableAmount.percent}
-                onChange={(value) => updateClaimableAmount(Number(value))}
-              >
-                <NumberInputField />
-                <NumberInputStepper>
-                  <NumberIncrementStepper />
-                  <NumberDecrementStepper />
-                </NumberInputStepper>
-              </NumberInput>
-              <Slider
-                flex="1"
-                step={5}
-                min={0}
-                max={100}
-                focusThumbOnChange={false}
-                value={claimableAmount.percent}
-                onChange={updateClaimableAmount}
-              >
-                <SliderTrack>
-                  <SliderFilledTrack />
-                </SliderTrack>
-                <SliderThumb children={claimableAmount.percent} boxSize={6} />
-              </Slider>
-              Claiming {claimableAmount.amount}
-            </Flex>
-          )}
-        </ModalBody>
-
-        <ModalFooter>
-          <Button colorScheme="blue" mr={3} onClick={onClose}>
-            Close
-          </Button>
-          <Button variant="ghost">Secondary Action</Button>
-        </ModalFooter>
-      </ModalContent>
-    </Modal>
   );
 };

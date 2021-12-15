@@ -9,6 +9,10 @@ export const formatMoney = (cents: number) => {
   return formatter.format(formatBaseValue(cents));
 };
 
+export const formatNormaliseAmount = (cents: number) => {
+  return Math.abs(formatBaseValue(cents));
+};
+
 export const formatBaseValue = (cents: number) => {
   return cents / 100;
 };
