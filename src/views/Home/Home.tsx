@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
 import React from "react";
 import { TransactionList } from "../../components/Transactions/TransactionList";
 import { useAccounts } from "../../hooks/useAccounts";

@@ -12,6 +12,7 @@ import React from "react";
 import { ColorModeToggle } from "../../components/ColorModeToggle/ColorModeToggle";
 import { background } from "../../constants/colorModes";
 import { useToken } from "../../hooks/useToken";
+import { supabase } from "../../supabaseClient";
 
 export const Settings = () => {
   const { setToken } = useToken();
@@ -20,8 +21,12 @@ export const Settings = () => {
 
   const revokeToken = () => {
     // @ts-ignore
-    setToken(null);
+    supabase.auth.update({ data: { api_key: null } });
     navigate("/");
+  };
+
+  const logout = () => {
+    supabase.auth.signOut();
   };
 
   return (
@@ -58,6 +63,11 @@ export const Settings = () => {
           </Stack>
           <Button colorScheme="red" onClick={revokeToken}>
             Revoke access
+          </Button>
+        </Flex>
+        <Flex justifyContent="flex-end">
+          <Button colorScheme="blue" onClick={logout}>
+            Log out
           </Button>
         </Flex>
       </Stack>

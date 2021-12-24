@@ -19,5 +19,6 @@ export const expenseTypes = [
     value: "WORK_FROM_HOME",
   },
   { label: "Vehicle", value: "VEHICLE" },
+  { label: "Software", value: "SOFTWARE" },
   { label: "Other", value: "OTHER" },
 ];

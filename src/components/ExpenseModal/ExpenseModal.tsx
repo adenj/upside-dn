@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import {
   Button,
-  Box,
   Flex,
   Modal,
   ModalOverlay,
@@ -18,7 +17,6 @@ import {
   InputLeftElement,
   InputGroup,
   Textarea,
-  Icon,
   Select,
   Switch,
   NumberInput,
@@ -32,42 +30,72 @@ import {
   SliderThumb,
   useToast,
 } from "@chakra-ui/react";
-import { IoStorefrontSharp } from "react-icons/io5";
-import { BsCurrencyDollar } from "react-icons/bs";
 import { SingleDatepicker } from "chakra-dayzed-datepicker";
 import { formatNormaliseAmount } from "../../utils/formatMoney";
 import { TransactionResource } from "../../types/transaction";
 import { supabase } from "../../supabaseClient";
 import { expenseTypes } from "../../constants/expenseTypes";
-import { AiFillDollarCircle } from "react-icons/ai";
+import { ExpenseObject } from "../../types/expense";
 
-interface ExpenseModalProps {
+interface NewExpenseModalProps {
+  editMode?: false;
+  transaction: TransactionResource;
+  onSubmitSuccess: never;
+}
+
+interface EditExpenseModalProps {
+  editMode: true;
+  transaction: ExpenseObject;
+  onSubmitSuccess: () => void;
+}
+
+interface CommonProps {
   isOpen: ModalProps["isOpen"];
   onClose: ModalProps["onClose"];
-  transaction: TransactionResource;
 }
+
+type ExpenseModalProps =
+  | CommonProps & (NewExpenseModalProps | EditExpenseModalProps);
 
 export const ExpenseModal = ({
   isOpen,
   onClose,
   transaction,
+  editMode,
+  onSubmitSuccess,
 }: ExpenseModalProps) => {
+  const data = editMode
+    ? {
+        ...transaction,
+        total_amount: transaction.total_amount * 100,
+      }
+    : {
+        vendor: transaction?.attributes.description,
+        description: transaction?.attributes.rawText,
+        total_amount: transaction?.attributes.amount.valueInBaseUnits,
+        transaction_date: transaction?.attributes.createdAt,
+        transaction_id: transaction.attributes?.id,
+      };
   const toast = useToast();
   const [submitting, setSubmitting] = useState(false);
-  const [vendor, setVendor] = useState(transaction.attributes.description);
-  const [description, setDescription] = useState(
-    transaction.attributes.rawText || ""
-  );
+  const [vendor, setVendor] = useState(data.vendor);
+  const [description, setDescription] = useState(data.description || "");
   const [amount, setAmount] = useState(
-    formatNormaliseAmount(transaction.attributes.amount.valueInBaseUnits)
+    formatNormaliseAmount(data.total_amount)
   );
-  const [date, setDate] = useState(new Date(transaction.attributes.createdAt));
-  const [type, setType] = useState("");
-  const [fullyClaimable, setFullyClaimable] = useState(true);
-  const [claimableAmount, setClaimableAmount] = useState({
-    percent: 100,
-    amount,
-  });
+  const [date, setDate] = useState(new Date(data.transaction_date));
+  const [type, setType] = useState(data.type ? data.type : "");
+  const [fullyClaimable, setFullyClaimable] = useState(
+    editMode ? data.fully_claimable : true
+  );
+  const [claimableAmount, setClaimableAmount] = useState(
+    editMode
+      ? { percent: data.claimable_percent, amount: data.claimable_amount }
+      : {
+          percent: 100,
+          amount,
+        }
+  );
 
   const updateClaimableAmount = (value: number) => {
     const newAmount = +(amount * (value / 100)).toFixed(2);
@@ -79,7 +107,8 @@ export const ExpenseModal = ({
     try {
       setSubmitting(true);
       const user = supabase.auth.user();
-      const data = {
+      const upsertData = {
+        ...(editMode ? { id: data.id } : {}),
         user_id: user!.id,
         created_at: new Date(),
         total_amount: amount,
@@ -88,16 +117,15 @@ export const ExpenseModal = ({
         description,
         fully_claimable: fullyClaimable,
         claimable_amount: fullyClaimable ? amount : claimableAmount.amount,
-        claimable_percent: claimableAmount.percent,
-        transaction_id: transaction.id,
+        claimable_percent: fullyClaimable ? 100 : claimableAmount.percent,
+        transaction_id: data.transaction_id,
         transaction_date: date,
       };
 
-      const { error, statusText } = await supabase
+      const { error } = await supabase
         .from("expenses")
-        .upsert(data, { returning: "minimal" });
+        .upsert(upsertData, { returning: "minimal" });
 
-      console.log(statusText);
       if (error) {
         toast({
           title: "Error",
@@ -108,13 +136,24 @@ export const ExpenseModal = ({
         });
         throw error;
       }
-      toast({
-        title: "Expense created",
-        status: "success",
-        isClosable: true,
-        duration: 5000,
-        description: "You can view your expense claims in the Expenses tab",
-      });
+      if (editMode) {
+        toast({
+          title: "Expense updated",
+          status: "success",
+          isClosable: true,
+          duration: 5000,
+          description: "Your expense has been successfully updated",
+        });
+        onSubmitSuccess();
+      } else {
+        toast({
+          title: "Expense created",
+          status: "success",
+          isClosable: true,
+          duration: 5000,
+          description: "You can view your expense claims in the Expenses tab",
+        });
+      }
     } catch (error) {
       toast({
         title: "Error",
@@ -228,7 +267,7 @@ export const ExpenseModal = ({
                   <SliderTrack>
                     <SliderFilledTrack />
                   </SliderTrack>
-                  <SliderThumb children={claimableAmount.percent} boxSize={6} />
+                  <SliderThumb boxSize={6} />
                 </Slider>
               </Flex>
             )}

@@ -14,24 +14,19 @@ export const Nav = () => {
   return (
     <Box as="nav" paddingY="4">
       <Container>
-        {token ? (
-          <Grid templateColumns="3fr 2fr 2fr 2fr" alignItems="center">
-            <GridItem>
-              <Logo />
-            </GridItem>
-            {session ? (
-              <>
-                <NavItem label="Feed" path="/feed" />
-                <NavItem label="Savers" path="/savers" />
-                <NavItem label="Settings" path="/settings" />
-              </>
-            ) : null}
-          </Grid>
-        ) : (
-          <Flex alignItems="center" justifyContent="space-between">
+        <Grid templateColumns="3fr 2fr 2fr 2fr 2fr" alignItems="center">
+          <GridItem>
             <Logo />
-          </Flex>
-        )}
+          </GridItem>
+          {session ? (
+            <>
+              <NavItem label="Feed" path="/feed" />
+              <NavItem label="Savers" path="/savers" />
+              <NavItem label="Expenses" path="/expenses" />
+              <NavItem label="Settings" path="/settings" />
+            </>
+          ) : null}
+        </Grid>
       </Container>
     </Box>
   );

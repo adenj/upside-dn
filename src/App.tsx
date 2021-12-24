@@ -1,5 +1,5 @@
 import React, { ReactElement } from "react";
-import { ChakraProvider, Container } from "@chakra-ui/react";
+import { ChakraProvider, Container, Text } from "@chakra-ui/react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { theme } from "./theme/theme";
 import { Home } from "./views/Home/Home";
@@ -13,6 +13,9 @@ import { Footer } from "./components/Footer/Footer";
 import { useSession } from "./hooks/useSession";
 import { Login } from "./views/Login/Login";
 import { SignUp } from "./views/SignUp/SignUp";
+import { Expenses } from "./views/Expenses/Expenses";
+import { useToken } from "./hooks/useToken";
+import { TokenPrompt } from "./views/TokenPrompt/TokenPrompt";
 
 const ProtectedRoute = ({ element }: { element: ReactElement }) => {
   const { session } = useSession();
@@ -27,41 +30,51 @@ const ProtectedRoute = ({ element }: { element: ReactElement }) => {
 export const App = () => {
   const { isLoading, data } = useAccounts();
   const { session } = useSession();
+  const { token } = useToken();
 
   return (
     <ChakraProvider theme={theme}>
-      <pre>{JSON.stringify(session, null, 2)}</pre>
       <Nav />
       <Container>
-        {isLoading && <Loader />}
-        {data && (
-          <Routes>
-            <Route path="/" element={<Navigate to="/feed" />} />
-            <Route
-              path="/feed"
-              element={<ProtectedRoute element={<Home />} />}
-            />
-            <Route
-              path="/savers"
-              element={<ProtectedRoute element={<Savers />} />}
-            />
-            <Route
-              path="/savers/:id"
-              element={<ProtectedRoute element={<Saver />} />}
-            />
-            <Route
-              path="/settings"
-              element={<ProtectedRoute element={<Settings />} />}
-            />
-            <Route
-              path="/login"
-              element={session ? <Navigate to="/feed" /> : <Login />}
-            />
-            <Route
-              path="/signup"
-              element={session ? <Navigate to="/feed" /> : <SignUp />}
-            />
-          </Routes>
+        {!token && session ? (
+          <TokenPrompt />
+        ) : (
+          <>
+            {isLoading && <Loader />}
+            {data && (
+              <Routes>
+                <Route path="/" element={<Navigate to="/feed" />} />
+                <Route
+                  path="/feed"
+                  element={<ProtectedRoute element={<Home />} />}
+                />
+                <Route
+                  path="/savers"
+                  element={<ProtectedRoute element={<Savers />} />}
+                />
+                <Route
+                  path="/savers/:id"
+                  element={<ProtectedRoute element={<Saver />} />}
+                />
+                <Route
+                  path="/settings"
+                  element={<ProtectedRoute element={<Settings />} />}
+                />
+                <Route
+                  path="/expenses"
+                  element={<ProtectedRoute element={<Expenses />} />}
+                />
+                <Route
+                  path="/login"
+                  element={session ? <Navigate to="/feed" /> : <Login />}
+                />
+                <Route
+                  path="/signup"
+                  element={session ? <Navigate to="/feed" /> : <SignUp />}
+                />
+              </Routes>
+            )}
+          </>
         )}
       </Container>
       <Footer />

@@ -14,7 +14,7 @@ import {
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { ExternalLink } from "../../components/ExternalLink/ExternalLink";
-import { useToken } from "../../hooks/useToken";
+import { supabase } from "../../supabaseClient";
 
 const tokenFormat =
   "up:yeah:CvcB12N9J44QzWg0k8BE0Xp6N2D1uImTQ0KU0Zz11lss34W44228NMGoy1R4OD1ItmKJp1ay12AIXDEIB7L1jIc743yd32n71qRGNk1L00T6Kk1QzkXtEuj71p1HobU5";
@@ -22,11 +22,10 @@ const tokenFormat =
 const initialState = { error: false, message: "" };
 
 export const TokenPrompt = () => {
-  const { setToken } = useToken();
   const [tokenValue, setTokenValue] = useState("");
   const [state, setState] = useState(initialState);
 
-  const onSubmit = (e: any) => {
+  const onSubmit = async (e: any) => {
     e.preventDefault();
     const parts = tokenValue.split(":");
     if (parts[0] !== "up" || parts[1] !== "yeah" || parts[2].length !== 128) {
@@ -36,7 +35,7 @@ export const TokenPrompt = () => {
       });
       return;
     }
-    setToken(tokenValue);
+    await supabase.auth.update({ data: { api_key: tokenValue } });
   };
 
   return (
