@@ -1,4 +1,4 @@
-import { Box, Text, Grid, Flex } from "@chakra-ui/layout";
+import { Box, Text, Grid } from "@chakra-ui/layout";
 import React from "react";
 import { Container, GridItem } from "@chakra-ui/react";
 import {} from "react-router-dom";
@@ -9,7 +9,6 @@ import { useToken } from "../../hooks/useToken";
 import { useSession } from "../../hooks/useSession";
 
 export const Nav = () => {
-  const { token } = useToken();
   const { session } = useSession();
   return (
     <Box as="nav" paddingY="4">

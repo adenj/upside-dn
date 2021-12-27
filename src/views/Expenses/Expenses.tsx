@@ -33,8 +33,6 @@ import { ExpenseObject } from "../../types/expense";
 import { ExpenseModal } from "../../components/ExpenseModal/ExpenseModal";
 
 export const Expenses = () => {
-  // const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [deleting, setDeleting] = useState(false);
   const [initiatedDelete, setInitiatedDelete] = useState<number>();
   const [expenses, setExpenses] = useState<ExpenseObject[] | []>([]);
@@ -70,7 +68,6 @@ export const Expenses = () => {
 
   const getData = async () => {
     try {
-      setLoading(true);
       const user = supabase.auth.user();
 
       const { data, error, status } = await supabase
@@ -88,8 +85,6 @@ export const Expenses = () => {
       }
     } catch (error) {
       console.log(error);
-    } finally {
-      setLoading(false);
     }
   };
 

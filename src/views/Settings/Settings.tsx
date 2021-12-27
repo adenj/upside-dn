@@ -15,7 +15,6 @@ import { useToken } from "../../hooks/useToken";
 import { supabase } from "../../supabaseClient";
 
 export const Settings = () => {
-  const { setToken } = useToken();
   const navigate = useNavigate();
   const bgColor = useColorModeValue(background.light, background.dark);
 

@@ -275,10 +275,19 @@ export const ExpenseModal = ({
         </ModalBody>
 
         <ModalFooter>
-          <Button colorScheme="blue" onClick={saveExpense}>
+          <Button
+            colorScheme="blue"
+            disabled={submitting}
+            onClick={saveExpense}
+          >
             Save
           </Button>
-          <Button variant="ghost" mr={3} onClick={onClose}>
+          <Button
+            variant="ghost"
+            mr={3}
+            disabled={submitting}
+            onClick={onClose}
+          >
             Cancel
           </Button>
         </ModalFooter>
