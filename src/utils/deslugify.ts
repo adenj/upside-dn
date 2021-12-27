@@ -1,8 +1,7 @@
 export const deslugify = (value: string) => {
-  var words = value.match(/[A-Za-z][a-z]*/g) || [];
+  const words = value.match(/[A-Za-z][a-z]*/g) || [];
   return words.map(capitalize).join(" ");
 };
 
-const capitalize = (word: string) => {
-  return word.charAt(0).toUpperCase() + word.substring(1);
-};
+const capitalize = (word: string) =>
+  word.charAt(0).toUpperCase() + word.substring(1);

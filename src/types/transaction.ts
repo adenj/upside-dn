@@ -120,7 +120,7 @@ export interface TransactionResource {
 }
 
 export interface TransactionResponse {
-  /**The list of transactions returned in this response. */
+  /** The list of transactions returned in this response. */
   data: TransactionResource[];
   links: {
     /** The link to the previous page in the results. If this value is null there is no previous page. */
