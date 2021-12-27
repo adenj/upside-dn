@@ -10,7 +10,7 @@ import { TransactionResource } from "../../types/transaction";
 
 export const Home = () => {
   const { data: accounts } = useAccounts();
-  const account = accounts!.data.find(
+  const account = accounts.data.find(
     (acc) => acc.attributes.displayName === "Spending"
   );
 

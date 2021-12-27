@@ -1,5 +1,5 @@
 import React, { ReactElement } from "react";
-import { ChakraProvider, Container } from "@chakra-ui/react";
+import { ChakraProvider, Container, Text } from "@chakra-ui/react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { theme } from "./theme/theme";
 import { Home } from "./views/Home/Home";

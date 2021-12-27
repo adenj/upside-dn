@@ -8,8 +8,11 @@ export const useTransactionQuery = (key: string) => {
   const path = makeQueryPath(key);
   const { token } = useToken();
 
-  const fetchTransactions = async (apiPath: string) =>
-    fetch(apiPath, createQueryProps(token!)).then((res) => res.json());
+  const fetchTransactions = async (path: string) => {
+    return await fetch(path, createQueryProps(token!)).then((res) =>
+      res.json()
+    );
+  };
 
   const {
     data,
@@ -29,7 +32,11 @@ export const useTransactionQuery = (key: string) => {
     }
   );
 
-  const list = data?.pages.map((page) => page.data).flat();
+  const list = data?.pages
+    .map((page) => {
+      return page.data;
+    })
+    .flat();
 
   return {
     data: list,

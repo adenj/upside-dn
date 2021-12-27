@@ -1,1 +1,3 @@
-export const isNegative = (amount: number) => Math.sign(amount) < 0;
+export const isNegative = (amount: number) => {
+  return Math.sign(amount) < 0;
+};

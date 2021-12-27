@@ -43,7 +43,7 @@ import { GiRoad } from "react-icons/gi";
 
 interface CategoryInfo {
   color: "yellow" | "orange" | "purple" | "blue";
-  icon: unknown;
+  icon: any;
 }
 type Categories = Record<string, CategoryInfo>;
 
