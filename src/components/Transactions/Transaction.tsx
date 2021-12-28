@@ -2,11 +2,18 @@ import {
   AccordionButton,
   AccordionItem,
   AccordionPanel,
-} from "@chakra-ui/accordion";
-import { Avatar } from "@chakra-ui/avatar";
-import { useColorModeValue } from "@chakra-ui/color-mode";
-import Icon from "@chakra-ui/icon";
-import { Badge, Box, Flex, Grid, GridItem, Text } from "@chakra-ui/layout";
+  Button,
+  Avatar,
+  useColorModeValue,
+  Icon,
+  Badge,
+  Box,
+  Flex,
+  Grid,
+  GridItem,
+  Text,
+  useDisclosure,
+} from "@chakra-ui/react";
 import { useToken } from "@chakra-ui/system";
 import { Tag, TagLabel, TagLeftIcon } from "@chakra-ui/tag";
 import { format } from "date-fns";
@@ -21,6 +28,7 @@ import { deslugify } from "../../utils/deslugify";
 import { formatMoney } from "../../utils/formatMoney";
 import { isNegative } from "../../utils/isNegative";
 import { Link } from "../Link";
+import { ExpenseModal } from "../ExpenseModal/ExpenseModal";
 
 export const Transaction = ({
   transaction,
@@ -29,6 +37,7 @@ export const Transaction = ({
 }) => {
   const { data: accountsData } = useAccounts();
   const cardBg = useColorModeValue(background.light, background.dark);
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const isNegativeAmount = isNegative(
     transaction.attributes.amount.valueInBaseUnits
@@ -148,6 +157,12 @@ export const Transaction = ({
             </GridItem>
           )}
         </Grid>
+        <Button onClick={onOpen}>Expense</Button>
+        <ExpenseModal
+          isOpen={isOpen}
+          onClose={onClose}
+          transaction={transaction}
+        />
       </AccordionPanel>
     </AccordionItem>
   );

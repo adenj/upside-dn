@@ -14,7 +14,7 @@ import {
 
 interface Context {
   token: string | null;
-  setToken: Dispatch<SetStateAction<string | null>>;
+  setToken: Dispatch<SetStateAction<string>>;
 }
 
 export const TokenContext = createContext<Context>(null!);

@@ -1,31 +1,30 @@
-import { Box, Text, Grid, Flex } from "@chakra-ui/layout";
+import { Box, Text, Grid } from "@chakra-ui/layout";
 import React from "react";
 import { Container, GridItem } from "@chakra-ui/react";
+import {} from "react-router-dom";
 import { Link } from "../Link";
 import { Logo } from "../Logo/Logo";
 import { useLocation } from "react-router-dom";
-import { useToken } from "../../hooks/useToken";
+import { useSession } from "../../hooks/useSession";
 
 export const Nav = () => {
-  const { token } = useToken();
+  const { session } = useSession();
   return (
     <Box as="nav" paddingY="4">
       <Container>
-        {token ? (
-          <Grid templateColumns="3fr 2fr 2fr 2fr" alignItems="center">
-            <GridItem>
-              <Logo />
-            </GridItem>
-            <NavItem label="Home" path="/" />
-            <NavItem label="Savers" path="/savers" />
-            {/* <NavItem label="Help" path="/help" /> */}
-            <NavItem label="Settings" path="/settings" />
-          </Grid>
-        ) : (
-          <Flex alignItems="center" justifyContent="space-between">
+        <Grid templateColumns="3fr 2fr 2fr 2fr 2fr" alignItems="center">
+          <GridItem>
             <Logo />
-          </Flex>
-        )}
+          </GridItem>
+          {session ? (
+            <>
+              <NavItem label="Feed" path="/feed" />
+              <NavItem label="Savers" path="/savers" />
+              <NavItem label="Expenses" path="/expenses" />
+              <NavItem label="Settings" path="/settings" />
+            </>
+          ) : null}
+        </Grid>
       </Container>
     </Box>
   );

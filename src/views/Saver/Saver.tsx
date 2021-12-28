@@ -7,6 +7,7 @@ import { LoadMoreButton } from "../../components/LoadMoreButton/LoadMoreButton";
 import { TransactionList } from "../../components/Transactions/TransactionList";
 import { useAccounts } from "../../hooks/useAccounts";
 import { useTransactionQuery } from "../../hooks/useTransactionQuery";
+import { TransactionResource } from "../../types/transaction";
 
 export const Saver = () => {
   const { id } = useParams();
@@ -23,7 +24,7 @@ export const Saver = () => {
         {account?.attributes.displayName}
       </Heading>
       <Balance amount={account?.attributes.balance.valueInBaseUnits!} />
-      <TransactionList list={data!} />
+      <TransactionList list={data! as TransactionResource[]} />
       <LoadMoreButton
         fetchNextPage={fetchNextPage}
         isFetchingNextPage={isFetchingNextPage}

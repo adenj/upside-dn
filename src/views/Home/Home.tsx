@@ -6,6 +6,7 @@ import { Balance } from "../../components/Balance/Balance";
 import { Loader } from "../../components/Loader/Loader";
 import { useTransactionQuery } from "../../hooks/useTransactionQuery";
 import { LoadMoreButton } from "../../components/LoadMoreButton/LoadMoreButton";
+import { TransactionResource } from "../../types/transaction";
 
 export const Home = () => {
   const { data: accounts } = useAccounts();
@@ -24,7 +25,7 @@ export const Home = () => {
         label="Available"
         amount={account?.attributes.balance.valueInBaseUnits!}
       />
-      <TransactionList list={data!} />
+      <TransactionList list={data as TransactionResource[]} />
       <LoadMoreButton
         fetchNextPage={fetchNextPage}
         isFetchingNextPage={isFetchingNextPage}
