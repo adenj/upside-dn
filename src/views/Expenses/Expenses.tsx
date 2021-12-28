@@ -44,7 +44,7 @@ export const Expenses = () => {
   const deleteExpense = async () => {
     try {
       setDeleting(true);
-      const { data, error } = await supabase
+      const { error } = await supabase
         .from("expenses")
         .delete()
         .match({ id: initiatedDelete });

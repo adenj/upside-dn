@@ -28,7 +28,7 @@ const ProtectedRoute = ({ element }: { element: ReactElement }) => {
 };
 
 export const App = () => {
-  const { isLoading, data } = useAccounts();
+  const { isLoading } = useAccounts();
   const { session } = useSession();
   const { token } = useToken();
 
