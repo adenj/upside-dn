@@ -11,7 +11,6 @@ import { useNavigate } from "react-router-dom";
 import React from "react";
 import { ColorModeToggle } from "../../components/ColorModeToggle/ColorModeToggle";
 import { background } from "../../constants/colorModes";
-import { useToken } from "../../hooks/useToken";
 import { supabase } from "../../supabaseClient";
 
 export const Settings = () => {

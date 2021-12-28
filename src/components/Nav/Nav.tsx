@@ -5,7 +5,6 @@ import {} from "react-router-dom";
 import { Link } from "../Link";
 import { Logo } from "../Logo/Logo";
 import { useLocation } from "react-router-dom";
-import { useToken } from "../../hooks/useToken";
 import { useSession } from "../../hooks/useSession";
 
 export const Nav = () => {

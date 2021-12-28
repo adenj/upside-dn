@@ -99,6 +99,7 @@ export const AuthForm = ({ method = "login" }: AuthFormProps) => {
                 required: true,
                 maxLength: 100,
                 pattern:
+                  // eslint-disable-next-line
                   /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
               })}
             />
