@@ -54,7 +54,6 @@ export const AuthForm = ({ method = "login" }: AuthFormProps) => {
         throw error;
       }
     } catch (error) {
-      console.log({ error, email, password });
       alert(error.error_description || error.mesage);
     } finally {
       setLoading(false);
@@ -70,7 +69,6 @@ export const AuthForm = ({ method = "login" }: AuthFormProps) => {
         throw error;
       }
     } catch (error) {
-      console.log({ error, email, password });
       alert(error.error_description || error.mesage);
     } finally {
       setLoading(false);
@@ -78,7 +76,6 @@ export const AuthForm = ({ method = "login" }: AuthFormProps) => {
   };
 
   const onSubmit: SubmitHandler<FormInputs> = (data) => {
-    console.log({ data, errors });
     if (method === "login") {
       handleLogin(data);
     }

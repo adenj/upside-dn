@@ -32,9 +32,6 @@ export const App = () => {
   const { session } = useSession();
   const { token } = useToken();
 
-  console.log(data);
-  console.log({ token });
-
   return (
     <ChakraProvider theme={theme}>
       <Nav />

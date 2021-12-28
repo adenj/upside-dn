@@ -48,7 +48,6 @@ export const Expenses = () => {
         .from("expenses")
         .delete()
         .match({ id: initiatedDelete });
-      console.log(data);
       if (error) {
         console.error(error);
       }
@@ -84,7 +83,7 @@ export const Expenses = () => {
         setExpenses(dataSortedByDate);
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
