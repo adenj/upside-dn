@@ -36,45 +36,55 @@ export const App = () => {
     <ChakraProvider theme={theme}>
       <Nav />
       <Container>
-        {!token && session ? (
-          <TokenPrompt />
+        {!token && session && <TokenPrompt />}
+        {isLoading && <Loader />}
+        {data && session ? (
+          <Routes>
+            <Route path="/" element={<Navigate to="/feed" />} />
+            <Route
+              path="/feed"
+              element={<ProtectedRoute element={<Home />} />}
+            />
+            <Route
+              path="/savers"
+              element={<ProtectedRoute element={<Savers />} />}
+            />
+            <Route
+              path="/savers/:id"
+              element={<ProtectedRoute element={<Saver />} />}
+            />
+            <Route
+              path="/settings"
+              element={<ProtectedRoute element={<Settings />} />}
+            />
+            <Route
+              path="/expenses"
+              element={<ProtectedRoute element={<Expenses />} />}
+            />
+            <Route
+              path="/login"
+              element={session ? <Navigate to="/feed" /> : <Login />}
+            />
+            <Route
+              path="/signup"
+              element={session ? <Navigate to="/feed" /> : <SignUp />}
+            />
+          </Routes>
         ) : (
-          <>
-            {isLoading && <Loader />}
-            {data && (
-              <Routes>
-                <Route path="/" element={<Navigate to="/feed" />} />
-                <Route
-                  path="/feed"
-                  element={<ProtectedRoute element={<Home />} />}
-                />
-                <Route
-                  path="/savers"
-                  element={<ProtectedRoute element={<Savers />} />}
-                />
-                <Route
-                  path="/savers/:id"
-                  element={<ProtectedRoute element={<Saver />} />}
-                />
-                <Route
-                  path="/settings"
-                  element={<ProtectedRoute element={<Settings />} />}
-                />
-                <Route
-                  path="/expenses"
-                  element={<ProtectedRoute element={<Expenses />} />}
-                />
-                <Route
-                  path="/login"
-                  element={session ? <Navigate to="/feed" /> : <Login />}
-                />
-                <Route
-                  path="/signup"
-                  element={session ? <Navigate to="/feed" /> : <SignUp />}
-                />
-              </Routes>
-            )}
-          </>
+          <Routes>
+            <Route
+              path="/login"
+              element={session ? <Navigate to="/feed" /> : <Login />}
+            />
+            <Route
+              path="/signup"
+              element={session ? <Navigate to="/feed" /> : <SignUp />}
+            />
+            <Route
+              path="/*"
+              element={session ? <Navigate to="/feed" /> : <Login />}
+            />
+          </Routes>
         )}
       </Container>
       <Footer />
