@@ -32,13 +32,16 @@ export const App = () => {
   const { session } = useSession();
   const { token } = useToken();
 
+  console.log(data);
+  console.log({token})
+
   return (
     <ChakraProvider theme={theme}>
       <Nav />
       <Container>
         {!token && session && <TokenPrompt />}
         {isLoading && <Loader />}
-        {data && session ? (
+        {data && (
           <Routes>
             <Route path="/" element={<Navigate to="/feed" />} />
             <Route
@@ -68,21 +71,6 @@ export const App = () => {
             <Route
               path="/signup"
               element={session ? <Navigate to="/feed" /> : <SignUp />}
-            />
-          </Routes>
-        ) : (
-          <Routes>
-            <Route
-              path="/login"
-              element={session ? <Navigate to="/feed" /> : <Login />}
-            />
-            <Route
-              path="/signup"
-              element={session ? <Navigate to="/feed" /> : <SignUp />}
-            />
-            <Route
-              path="/*"
-              element={session ? <Navigate to="/feed" /> : <Login />}
             />
           </Routes>
         )}

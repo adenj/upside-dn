@@ -1,6 +1,7 @@
 import React, { createContext, ReactNode } from "react";
 import { useQuery } from "react-query";
 import { baseUrl } from "../constants/upApi";
+import { useToken } from "../hooks/useToken";
 import { AccountResponse } from "../types/account";
 import { createQueryProps } from "../utils/createQueryProps";
 import { TokenContext } from "./TokenProvider";
@@ -14,7 +15,7 @@ interface Context {
 export const AccountsContext = createContext<Context>(null!);
 
 export const AccountsProvider = ({ children }: { children: ReactNode }) => {
-  const { token } = React.useContext(TokenContext);
+  const { token } = useToken();
   const { data, isLoading, error } = useQuery<AccountResponse, Error>(
     "accounts",
     async () => {
