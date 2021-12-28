@@ -33,15 +33,16 @@ export const App = () => {
   const { token } = useToken();
 
   console.log(data);
-  console.log({token})
+  console.log({ token });
 
   return (
     <ChakraProvider theme={theme}>
       <Nav />
       <Container>
         {!token && session && <TokenPrompt />}
-        {isLoading && <Loader />}
-        {data && (
+        {isLoading ? (
+          <Loader />
+        ) : (
           <Routes>
             <Route path="/" element={<Navigate to="/feed" />} />
             <Route
