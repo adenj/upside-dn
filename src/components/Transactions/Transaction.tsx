@@ -29,6 +29,7 @@ import { formatMoney } from "../../utils/formatMoney";
 import { isNegative } from "../../utils/isNegative";
 import { Link } from "../Link";
 import { ExpenseModal } from "../ExpenseModal/ExpenseModal";
+import { useExpenseAccess } from "../../hooks/useExpenseAccess";
 
 export const Transaction = ({
   transaction,
@@ -38,6 +39,7 @@ export const Transaction = ({
   const { data: accountsData } = useAccounts();
   const cardBg = useColorModeValue(background.light, background.dark);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { hasExpenseAccess } = useExpenseAccess();
 
   const isNegativeAmount = isNegative(
     transaction.attributes.amount.valueInBaseUnits
@@ -106,7 +108,7 @@ export const Transaction = ({
       </AccordionButton>
       <AccordionPanel bg={cardBg} paddingX={6}>
         <Grid
-          gridTemplateColumns="1fr 1fr 1fr 1fr 1fr"
+          gridTemplateColumns={["auto", "1fr 1fr 1fr 1fr 1fr"]}
           gridTemplateAreas={`". payment-details payment-details payment-details status" ". category category category category" ". round-up round-up round-up round-up"
           `}
         >
@@ -157,12 +159,16 @@ export const Transaction = ({
             </GridItem>
           )}
         </Grid>
-        <Button onClick={onOpen}>Expense</Button>
-        <ExpenseModal
-          isOpen={isOpen}
-          onClose={onClose}
-          transaction={transaction}
-        />
+        {isNegativeAmount && hasExpenseAccess ? (
+          <>
+            <Button onClick={onOpen}>Expense</Button>
+            <ExpenseModal
+              isOpen={isOpen}
+              onClose={onClose}
+              transaction={transaction}
+            />
+          </>
+        ) : null}
       </AccordionPanel>
     </AccordionItem>
   );
@@ -211,7 +217,7 @@ const RoundUp = ({
   const totalAmount = roundUp.amount.valueInBaseUnits + amount.valueInBaseUnits;
   return (
     <Grid
-      gridTemplateColumns="1fr 1fr 1fr 1fr"
+      gridTemplateColumns={["2fr 1fr 1fr 1fr", "1fr 1fr 1fr 1fr"]}
       alignItems="center"
       textAlign="right"
       paddingTop="8"
