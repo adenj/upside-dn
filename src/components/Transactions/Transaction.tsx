@@ -108,7 +108,7 @@ export const Transaction = ({
       </AccordionButton>
       <AccordionPanel bg={cardBg} paddingX={6}>
         <Grid
-          gridTemplateColumns="1fr 1fr 1fr 1fr 1fr"
+          gridTemplateColumns={["auto", "1fr 1fr 1fr 1fr 1fr"]}
           gridTemplateAreas={`". payment-details payment-details payment-details status" ". category category category category" ". round-up round-up round-up round-up"
           `}
         >
@@ -217,7 +217,7 @@ const RoundUp = ({
   const totalAmount = roundUp.amount.valueInBaseUnits + amount.valueInBaseUnits;
   return (
     <Grid
-      gridTemplateColumns="1fr 1fr 1fr 1fr"
+      gridTemplateColumns={["2fr 1fr 1fr 1fr", "1fr 1fr 1fr 1fr"]}
       alignItems="center"
       textAlign="right"
       paddingTop="8"
