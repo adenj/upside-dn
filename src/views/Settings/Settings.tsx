@@ -37,7 +37,12 @@ export const Settings = () => {
         borderRadius="lg"
         marginTop={6}
       >
-        <Flex alignItems="center" justifyContent="space-between">
+        <Flex
+          alignItems="center"
+          justifyContent="space-between"
+          flexDirection={["column", "row"]}
+          gridGap="8px"
+        >
           <Stack spacing={2} flexBasis="60%">
             <Text fontSize="lg" fontWeight="bold">
               Color mode
@@ -49,7 +54,12 @@ export const Settings = () => {
           </Stack>
           <ColorModeToggle />
         </Flex>
-        <Flex alignItems="center" justifyContent="space-between">
+        <Flex
+          alignItems="center"
+          justifyContent="space-between"
+          flexDirection={["column", "row"]}
+          gridGap="8px"
+        >
           <Stack spacing={2} flexBasis="60%">
             <Text fontSize="lg" fontWeight="bold">
               Remove access
@@ -59,12 +69,20 @@ export const Settings = () => {
               token
             </Text>
           </Stack>
-          <Button colorScheme="red" onClick={revokeToken}>
+          <Button
+            colorScheme="red"
+            onClick={revokeToken}
+            width={["full", "initial"]}
+          >
             Revoke access
           </Button>
         </Flex>
         <Flex justifyContent="flex-end">
-          <Button colorScheme="blue" onClick={logout}>
+          <Button
+            colorScheme="blue"
+            onClick={logout}
+            width={["full", "initial"]}
+          >
             Log out
           </Button>
         </Flex>

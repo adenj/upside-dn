@@ -29,6 +29,7 @@ import { formatMoney } from "../../utils/formatMoney";
 import { isNegative } from "../../utils/isNegative";
 import { Link } from "../Link";
 import { ExpenseModal } from "../ExpenseModal/ExpenseModal";
+import { useExpenseAccess } from "../../hooks/useExpenseAccess";
 
 export const Transaction = ({
   transaction,
@@ -38,6 +39,7 @@ export const Transaction = ({
   const { data: accountsData } = useAccounts();
   const cardBg = useColorModeValue(background.light, background.dark);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { hasExpenseAccess } = useExpenseAccess();
 
   const isNegativeAmount = isNegative(
     transaction.attributes.amount.valueInBaseUnits
@@ -157,12 +159,16 @@ export const Transaction = ({
             </GridItem>
           )}
         </Grid>
-        <Button onClick={onOpen}>Expense</Button>
-        <ExpenseModal
-          isOpen={isOpen}
-          onClose={onClose}
-          transaction={transaction}
-        />
+        {isNegativeAmount && hasExpenseAccess ? (
+          <>
+            <Button onClick={onOpen}>Expense</Button>
+            <ExpenseModal
+              isOpen={isOpen}
+              onClose={onClose}
+              transaction={transaction}
+            />
+          </>
+        ) : null}
       </AccordionPanel>
     </AccordionItem>
   );

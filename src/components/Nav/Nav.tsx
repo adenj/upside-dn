@@ -1,4 +1,4 @@
-import { Box, Text, Grid } from "@chakra-ui/layout";
+import { Box, Text, Grid, Flex } from "@chakra-ui/layout";
 import React from "react";
 import { Container, GridItem } from "@chakra-ui/react";
 import {} from "react-router-dom";
@@ -6,25 +6,33 @@ import { Link } from "../Link";
 import { Logo } from "../Logo/Logo";
 import { useLocation } from "react-router-dom";
 import { useSession } from "../../hooks/useSession";
+import { useExpenseAccess } from "../../hooks/useExpenseAccess";
 
 export const Nav = () => {
   const { session } = useSession();
+  const { hasExpenseAccess } = useExpenseAccess();
   return (
-    <Box as="nav" paddingY="4">
+    <Box as="nav" paddingBottom="4" paddingTop="8">
       <Container>
-        <Grid templateColumns="3fr 2fr 2fr 2fr 2fr" alignItems="center">
-          <GridItem>
-            <Logo />
-          </GridItem>
-          {session ? (
-            <>
-              <NavItem label="Feed" path="/feed" />
-              <NavItem label="Savers" path="/savers" />
-              <NavItem label="Expenses" path="/expenses" />
-              <NavItem label="Settings" path="/settings" />
-            </>
-          ) : null}
-        </Grid>
+        <Flex
+          alignItems={"center"}
+          justifyContent={"space-between"}
+          flexDirection={["column", "row"]}
+        >
+          <Logo />
+          <Flex gridGap={"10px"}>
+            {session ? (
+              <>
+                <NavItem label="Feed" path="/feed" />
+                <NavItem label="Savers" path="/savers" />
+                {hasExpenseAccess && (
+                  <NavItem label="Expenses" path="/expenses" />
+                )}
+                <NavItem label="Settings" path="/settings" />
+              </>
+            ) : null}
+          </Flex>
+        </Flex>
       </Container>
     </Box>
   );
@@ -34,22 +42,20 @@ const NavItem = ({ path, label }: { path: string; label: string }) => {
   const location = useLocation();
 
   return (
-    <GridItem display="flex" justifyContent="center">
-      <Link to={path}>
-        <Text
-          padding="2"
-          fontSize="lg"
-          fontWeight="black"
-          color={
-            location.pathname === path ||
-            (path === "/savers" && location.pathname.includes(path))
-              ? "brand.orange"
-              : "default"
-          }
-        >
-          {label}
-        </Text>
-      </Link>
-    </GridItem>
+    <Link to={path}>
+      <Text
+        padding="2"
+        fontSize="lg"
+        fontWeight="black"
+        color={
+          location.pathname === path ||
+          (path === "/savers" && location.pathname.includes(path))
+            ? "brand.orange"
+            : "default"
+        }
+      >
+        {label}
+      </Text>
+    </Link>
   );
 };

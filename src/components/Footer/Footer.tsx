@@ -17,7 +17,11 @@ export const Footer = () => {
   return (
     <Box paddingY={12} marginTop={8} bg={bgColor}>
       <Container>
-        <Flex justifyContent="space-between">
+        <Flex
+          justifyContent="space-between"
+          flexDirection={["column", "row"]}
+          gridGap={"10"}
+        >
           <Text>This project is not affiliated with Up Bank</Text>
           <Link
             isExternal
