@@ -2653,10 +2653,10 @@
   resolved "https://registry.yarnpkg.com/@types/q/-/q-1.5.5.tgz#75a2a8e7d8ab4b230414505d92335d1dcb53a6df"
   integrity sha512-L28j2FcJfSZOnL1WBjDYp2vUHCeIFlyYI/53EwD/rKUBQ7MtUUfbQWiyKJGpcnv4/WgrhWsFKrcPstcAt/J0tQ==
 
-"@types/react-datepicker@4.3.2":
-  version "4.3.2"
-  resolved "https://registry.yarnpkg.com/@types/react-datepicker/-/react-datepicker-4.3.2.tgz#e071b9f5fbc6f183a66f6d6dab7c9f2f21b01d40"
-  integrity sha512-vj8sN+tdQPF13bH4CU8DdTuT0Z4h6+3IG14lGCSDlIw1QvTe3svr2Yqp7KbDlcRpbdcnhya3e91SnCVk+kH/RQ==
+"@types/react-datepicker@4.3.4":
+  version "4.3.4"
+  resolved "https://registry.yarnpkg.com/@types/react-datepicker/-/react-datepicker-4.3.4.tgz#1cccf5acfb8672fce08940d1cf69e664500ea63d"
+  integrity sha512-5nTTz37KdTUgMZ1AAxztMWNtEnIMVRo8oCAEhIv0a6uUqDjvSKaMyPRpBV+8chi6f/A8wlTKJIpojpXca2dx3A==
   dependencies:
     "@popperjs/core" "^2.9.2"
     "@types/react" "*"
@@ -10145,10 +10145,10 @@ react-clientside-effect@^1.2.5:
   dependencies:
     "@babel/runtime" "^7.12.13"
 
-react-datepicker@4.5.0:
-  version "4.5.0"
-  resolved "https://registry.yarnpkg.com/react-datepicker/-/react-datepicker-4.5.0.tgz#aabcaa8d9c8492998cd0484b67077cbf9908e66a"
-  integrity sha512-mFP/SbtFSXx21Wx3Nfv+RREwd/x0q14x7QL79ZCi/PVkHSFLwLWhXyOtj3OIzi1AcVYb/fMMcvi8e5b12n8/sg==
+react-datepicker@4.6.0:
+  version "4.6.0"
+  resolved "https://registry.yarnpkg.com/react-datepicker/-/react-datepicker-4.6.0.tgz#10fc7c5b9c72df5c3e29712d559cb3fe73fd9f62"
+  integrity sha512-JGSQnQSQYUkS7zvSaZuyHv5lxp3wMrN7GXV0VA0E9Ax9fL3Bb6E1pSXjL6C3WoeuV8dt/mItQfRkPpRGCrl/OA==
   dependencies:
     "@popperjs/core" "^2.9.2"
     classnames "^2.2.6"
