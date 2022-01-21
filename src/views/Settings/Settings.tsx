@@ -166,8 +166,8 @@ export const Settings = () => {
           <ModalHeader>Request data deletion</ModalHeader>
           <ModalCloseButton />
           <form
-            onSubmit={() => {
-              return;
+            onSubmit={(e) => {
+              e.preventDefault();
             }}
             // @ts-ignore
             netlify
