@@ -49,8 +49,9 @@ export const Settings = () => {
     const user = supabase.auth.user();
     setDeleteFormStatus("submitting");
     try {
-      await fetch("/data-delete?no-cache=1", {
+      await fetch("/", {
         method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: encode({
           uid: user!.id,
           comments,
