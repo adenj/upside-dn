@@ -28,6 +28,7 @@ import {
 import { encode } from "querystring";
 import React, { useState } from "react";
 import { background } from "../../constants/colorModes";
+import { useExpenseAccess } from "../../hooks/useExpenseAccess";
 import { supabase } from "../../supabaseClient";
 
 const VERIFICATION_PHRASE = "delete";
@@ -44,6 +45,7 @@ export const Settings = () => {
   const [deleteFormStatus, setDeleteFormStatus] = useState("inProgress");
   const [formError, setFormError] = useState(false);
   const showToast = useToast();
+  const { hasExpenseAccess } = useExpenseAccess();
 
   const deleteFormOnSubmit = async () => {
     const user = supabase.auth.user();
@@ -75,10 +77,26 @@ export const Settings = () => {
     }
   };
 
+  const handleExpensesToggle = async () => {
+    try {
+      const { error } = await supabase.auth.update({
+        data: {
+          expenseAccess: !hasExpenseAccess,
+        },
+      });
+      if (error) {
+        throw error;
+      }
+    } catch (error) {
+      alert(error.error_description || error.mesage);
+    }
+  };
+
   return (
     <>
       <Box>
         <Heading textAlign="center">Settings</Heading>
+
         <Stack
           spacing={8}
           background={bgColor}
@@ -86,6 +104,33 @@ export const Settings = () => {
           borderRadius="lg"
           marginTop={6}
         >
+          <Flex
+            alignItems="center"
+            justifyContent="space-between"
+            flexDirection={["column", "row"]}
+            gridGap="8px"
+          >
+            <Stack spacing={2} flexBasis="60%">
+              <Text fontSize="lg" fontWeight="bold">
+                Expenses beta feature
+              </Text>
+              <Text fontSize="sm">
+                Turn on beta access to the "Expenses" feature, allowing you to
+                choose transactions from your feed to track as Expenses. <br />{" "}
+                Note: This feature is in early access, and is not fully finished
+              </Text>
+            </Stack>
+            <Flex justifyContent="flex-end">
+              <Button
+                onClick={handleExpensesToggle}
+                colorScheme="gray"
+                variant="outline"
+                width={["full", "initial"]}
+              >
+                Turn {hasExpenseAccess ? "off" : "on"} Expenses
+              </Button>
+            </Flex>
+          </Flex>
           <Flex
             alignItems="center"
             justifyContent="space-between"
