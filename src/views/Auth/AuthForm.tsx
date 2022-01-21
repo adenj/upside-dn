@@ -8,9 +8,20 @@ import {
   FormControl,
   FormErrorMessage,
   FormLabel,
+  useDisclosure,
+  IconButton,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
 } from "@chakra-ui/react";
-import { supabase } from "../../supabaseClient";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { AiFillQuestionCircle } from "react-icons/ai";
+import { supabase } from "../../supabaseClient";
+import { TokenInfoModal } from "../../components/TokenInfoModal/TokenInfoModal";
 
 interface AuthFormProps {
   method: "login" | "register";
@@ -36,6 +47,7 @@ export const AuthForm = ({ method = "login" }: AuthFormProps) => {
     handleSubmit,
     formState: { errors },
   } = useForm<FormInputs>();
+  const { isOpen, onClose, onOpen } = useDisclosure();
 
   const handleSignUp = async (data: FormInputs) => {
     const { email, password, key } = data;
@@ -129,7 +141,15 @@ export const AuthForm = ({ method = "login" }: AuthFormProps) => {
           </FormControl>
           {method === "register" && (
             <FormControl isInvalid={Boolean(errors.password)}>
-              <FormLabel fontWeight="bolder">Up API Key</FormLabel>
+              <FormLabel fontWeight="bolder">
+                Up API Key{" "}
+                <IconButton
+                  aria-label="API Key Help"
+                  variant="ghost"
+                  onClick={onOpen}
+                  icon={<AiFillQuestionCircle />}
+                />
+              </FormLabel>
               <Input
                 placeholder="up:yeah"
                 {...register("key", {
@@ -145,6 +165,22 @@ export const AuthForm = ({ method = "login" }: AuthFormProps) => {
           </ButtonGroup>
         </Stack>
       </form>
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Up API Key</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <TokenInfoModal />
+          </ModalBody>
+
+          <ModalFooter>
+            <Button colorScheme="gray" mr={3} onClick={onClose}>
+              Close
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </Box>
   );
 };
