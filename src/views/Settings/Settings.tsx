@@ -125,7 +125,6 @@ export const Settings = () => {
             method="post"
             action="/"
             data-netlify="true"
-            onSubmit={deleteFormOnSubmit}
           >
             <ModalBody>
               <Text>
@@ -179,6 +178,7 @@ export const Settings = () => {
                 Cancel
               </Button>
               <Button
+                onClick={deleteFormOnSubmit}
                 colorScheme={"red"}
                 disabled={
                   verification !== VERIFICATION_PHRASE ||
