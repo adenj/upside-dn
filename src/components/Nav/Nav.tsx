@@ -6,6 +6,7 @@ import { Logo } from "../Logo/Logo";
 import { useLocation } from "react-router-dom";
 import { useSession } from "../../hooks/useSession";
 import { useExpenseAccess } from "../../hooks/useExpenseAccess";
+import { UserMenu } from "./UserMenu";
 
 export const Nav = () => {
   const { session } = useSession();
@@ -27,7 +28,8 @@ export const Nav = () => {
                 {hasExpenseAccess && (
                   <NavItem label="Expenses" path="/expenses" />
                 )}
-                <NavItem label="Settings" path="/settings" />
+                {/* <NavItem label="Settings" path="/settings" /> */}
+                <UserMenu />
               </>
             ) : null}
           </Flex>
