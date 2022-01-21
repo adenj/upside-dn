@@ -40,7 +40,7 @@ export const Settings = () => {
   } = useDisclosure();
   const [comments, setComments] = useState("");
   const [verification, setVerification] = useState("");
-  const [deleteFormStatus, setDeleteFormStatus] = useState("inProgress");
+  const [, setDeleteFormStatus] = useState("inProgress");
   const [formError, setFormError] = useState(false);
 
   const deleteFormOnSubmit = async () => {

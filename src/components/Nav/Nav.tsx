@@ -28,7 +28,6 @@ export const Nav = () => {
                 {hasExpenseAccess && (
                   <NavItem label="Expenses" path="/expenses" />
                 )}
-                {/* <NavItem label="Settings" path="/settings" /> */}
                 <UserMenu />
               </>
             ) : null}
