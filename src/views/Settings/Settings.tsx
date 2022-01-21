@@ -55,6 +55,7 @@ export const Settings = () => {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: encode({
+          "form-name": "data-deletion-requests",
           uid: user!.id,
           comments,
         }),
