@@ -1,8 +1,8 @@
 import { Box, Text, Container, Flex } from "@chakra-ui/react";
 import React from "react";
-import {} from "react-router-dom";
 import { Link } from "../Link";
 import { Logo } from "../Logo/Logo";
+import { Link as ReactRouterLink } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { useSession } from "../../hooks/useSession";
 import { useExpenseAccess } from "../../hooks/useExpenseAccess";
@@ -19,7 +19,9 @@ export const Nav = () => {
           justifyContent={"space-between"}
           flexDirection={["column", "row"]}
         >
-          <Logo />
+          <ReactRouterLink to="/">
+            <Logo />
+          </ReactRouterLink>
           <Flex gridGap={"10px"}>
             {session ? (
               <>

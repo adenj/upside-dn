@@ -2,7 +2,7 @@ import React, { ReactElement } from "react";
 import { ChakraProvider, Container } from "@chakra-ui/react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { theme } from "./theme/theme";
-import { Home } from "./views/Home/Home";
+import { Home } from "./views/Feed/Feed";
 import { Nav } from "./components/Nav/Nav";
 import { Savers } from "./views/Savers/Savers";
 import { Saver } from "./views/Saver/Saver";
@@ -14,14 +14,12 @@ import { useSession } from "./hooks/useSession";
 import { Login } from "./views/Login/Login";
 import { SignUp } from "./views/SignUp/SignUp";
 import { Expenses } from "./views/Expenses/Expenses";
-import { useToken } from "./hooks/useToken";
-import { TokenPrompt } from "./views/TokenPrompt/TokenPrompt";
 
 const ProtectedRoute = ({ element }: { element: ReactElement }) => {
   const { session } = useSession();
 
   if (!session) {
-    return <Navigate to="/login" />;
+    return <Navigate to="/signup" />;
   }
 
   return element;
@@ -30,13 +28,11 @@ const ProtectedRoute = ({ element }: { element: ReactElement }) => {
 export const App = () => {
   const { isLoading } = useAccounts();
   const { session } = useSession();
-  const { token } = useToken();
 
   return (
     <ChakraProvider theme={theme}>
       <Nav />
       <Container>
-        {!token && session && <TokenPrompt />}
         {isLoading ? (
           <Loader />
         ) : (
