@@ -23,6 +23,7 @@ import {
   AlertDescription,
   CloseButton,
   AlertTitle,
+  useToast,
 } from "@chakra-ui/react";
 import { encode } from "querystring";
 import React, { useState } from "react";
@@ -40,8 +41,9 @@ export const Settings = () => {
   } = useDisclosure();
   const [comments, setComments] = useState("");
   const [verification, setVerification] = useState("");
-  const [, setDeleteFormStatus] = useState("inProgress");
+  const [deleteFormStatus, setDeleteFormStatus] = useState("inProgress");
   const [formError, setFormError] = useState(false);
+  const showToast = useToast();
 
   const deleteFormOnSubmit = async () => {
     const user = supabase.auth.user();
@@ -55,6 +57,14 @@ export const Settings = () => {
         }),
       });
       setFormError(false);
+      showToast({
+        title: "Requested submitted",
+        description:
+          "We will get back to you to confirm once your data has been deleted",
+        status: "success",
+        duration: 10000,
+        isClosable: false,
+      });
     } catch (error) {
       console.error(error);
       setFormError(true);
@@ -109,6 +119,8 @@ export const Settings = () => {
           <ModalHeader>Request data deletion</ModalHeader>
           <ModalCloseButton />
           <form
+            // @ts-ignore
+            netlify
             name="data-delete"
             method="post"
             action="/"
@@ -168,7 +180,10 @@ export const Settings = () => {
               </Button>
               <Button
                 colorScheme={"red"}
-                disabled={verification !== VERIFICATION_PHRASE}
+                disabled={
+                  verification !== VERIFICATION_PHRASE ||
+                  deleteFormStatus === "submitting"
+                }
               >
                 Request data deletion
               </Button>
