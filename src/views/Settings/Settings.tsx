@@ -37,7 +37,7 @@ export const Settings = () => {
   const bgColor = useColorModeValue(background.light, background.dark);
   const {
     isOpen: isDeleteModalOpen,
-    onOpen: deleteModalOnOpen,
+    // onOpen: deleteModalOnOpen,
     onClose: deleteModalOnClose,
   } = useDisclosure();
   const [comments, setComments] = useState("");
@@ -132,7 +132,7 @@ export const Settings = () => {
               </Button>
             </Flex>
           </Flex>
-          <Flex
+          {/* <Flex
             alignItems="center"
             justifyContent="space-between"
             flexDirection={["column", "row"]}
@@ -156,7 +156,7 @@ export const Settings = () => {
                 Request deletion
               </Button>
             </Flex>
-          </Flex>
+          </Flex> */}
         </Stack>
       </Box>
 
