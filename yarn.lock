@@ -4073,10 +4073,10 @@ case-sensitive-paths-webpack-plugin@2.3.0:
   resolved "https://registry.yarnpkg.com/case-sensitive-paths-webpack-plugin/-/case-sensitive-paths-webpack-plugin-2.3.0.tgz#23ac613cc9a856e4f88ff8bb73bbb5e989825cf7"
   integrity sha512-/4YgnZS8y1UXXmC02xD5rRrBEu6T5ub+mQHLNRj0fzTRbgdBYhsNo2V5EqwgqrExjxsjtF/OpAKAMkKsxbD5XQ==
 
-chakra-dayzed-datepicker@0.1.4:
-  version "0.1.4"
-  resolved "https://registry.yarnpkg.com/chakra-dayzed-datepicker/-/chakra-dayzed-datepicker-0.1.4.tgz#2716bea8f2bf4df38d2d8a26fc74c71e2ff89d37"
-  integrity sha512-irf+CPrxpisx6DyVhdMYwTCyUuKrBmUmp6XWg1gtaaJ3ippxfy9x6BUw5K8ig0AROKiZIqDSl5gLE8lK8uVsUg==
+chakra-dayzed-datepicker@0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/chakra-dayzed-datepicker/-/chakra-dayzed-datepicker-0.2.0.tgz#4928aa6d2f6e524507818b33b6e524ae446998e2"
+  integrity sha512-ZW7EA2/RI0aqBuCOSYcTTORorVKE4Wz2dwvNrc5s2aaTmLNhkKeO2AsDdPw6FqRFwu2IV4WKCbHlCW7Vwv9KNg==
   dependencies:
     arrow-keys-react "^1.0.6"
 
