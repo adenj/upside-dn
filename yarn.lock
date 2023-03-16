@@ -4883,10 +4883,10 @@ date-fns@^2.0.0, date-fns@^2.0.1, date-fns@^2.24.0:
   resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.27.0.tgz#e1ff3c3ddbbab8a2eaadbb6106be2929a5a2d92b"
   integrity sha512-sj+J0Mo2p2X1e306MHq282WS4/A8Pz/95GIFcsPNMPMZVI3EUrAdSv90al1k+p74WGLCruMXk23bfEDZa71X9Q==
 
-dayzed@3.2.2:
-  version "3.2.2"
-  resolved "https://registry.yarnpkg.com/dayzed/-/dayzed-3.2.2.tgz#2b78858d86987ee14fd03fcb187d2d17638d0cdd"
-  integrity sha512-BzNoj+6+er5DPQ0F82Yh1U8MU/jyOo7R+jIlK9FsSjfk4ZIISalygzMcsXTGTFedm5UfTddQnELMVBQUXZDv9Q==
+dayzed@3.2.3:
+  version "3.2.3"
+  resolved "https://registry.yarnpkg.com/dayzed/-/dayzed-3.2.3.tgz#78c5ab7e28579cd3c0f9f848b744ac5c768e9a22"
+  integrity sha512-qXTIKs+R6ydWwNo+X1wu3lUptyRSGoyY+ZzRcQSM0zUlaG+/Ei+bFjqbQm1T2oJ+WKNkTHURBcGsxnx9N+9kfA==
   dependencies:
     "@babel/runtime" "^7.6.2"
     date-fns "^2.0.0"
