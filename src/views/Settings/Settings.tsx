@@ -25,7 +25,6 @@ import {
   AlertTitle,
   useToast,
 } from "@chakra-ui/react";
-import { encode } from "querystring";
 import React, { useState } from "react";
 import { background } from "../../constants/colorModes";
 import { useExpenseAccess } from "../../hooks/useExpenseAccess";
@@ -37,7 +36,6 @@ export const Settings = () => {
   const bgColor = useColorModeValue(background.light, background.dark);
   const {
     isOpen: isDeleteModalOpen,
-    // onOpen: deleteModalOnOpen,
     onClose: deleteModalOnClose,
   } = useDisclosure();
   const [comments, setComments] = useState("");
@@ -46,37 +44,6 @@ export const Settings = () => {
   const [formError, setFormError] = useState(false);
   const showToast = useToast();
   const { hasExpenseAccess } = useExpenseAccess();
-
-  const deleteFormOnSubmit = async () => {
-    const user = supabase.auth.user();
-    setDeleteFormStatus("submitting");
-    try {
-      await fetch("/", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: encode({
-          "form-name": "data-deletion-requests",
-          uid: user!.id,
-          comments,
-        }),
-      });
-      setFormError(false);
-      showToast({
-        title: "Requested submitted",
-        description:
-          "We will get back to you to confirm once your data has been deleted",
-        status: "success",
-        duration: 10000,
-        isClosable: false,
-      });
-    } catch (error) {
-      console.error(error);
-      setFormError(true);
-    } finally {
-      setDeleteFormStatus("submitted");
-      deleteModalOnClose();
-    }
-  };
 
   const handleExpensesToggle = async () => {
     try {
@@ -132,31 +99,6 @@ export const Settings = () => {
               </Button>
             </Flex>
           </Flex>
-          {/* <Flex
-            alignItems="center"
-            justifyContent="space-between"
-            flexDirection={["column", "row"]}
-            gridGap="8px"
-          >
-            <Stack spacing={2} flexBasis="60%">
-              <Text fontSize="lg" fontWeight="bold">
-                Request data deletion
-              </Text>
-              <Text fontSize="sm">
-                You can request to have your account, as well as all related
-                data permanently deleted.
-              </Text>
-            </Stack>
-            <Flex justifyContent="flex-end">
-              <Button
-                onClick={deleteModalOnOpen}
-                colorScheme="red"
-                width={["full", "initial"]}
-              >
-                Request deletion
-              </Button>
-            </Flex>
-          </Flex> */}
         </Stack>
       </Box>
 
