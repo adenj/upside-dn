@@ -27,15 +27,13 @@
     "react-icons": "4.3.1",
     "react-query": "3.34.12",
     "react-router-dom": "6.2.1",
-    "react-scripts": "4.0.3",
     "typescript": "3.9.10",
     "web-vitals": "2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -51,5 +49,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.0.3",
+    "vite": "^4.4.7"
   }
 }
