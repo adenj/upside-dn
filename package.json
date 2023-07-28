@@ -6,7 +6,6 @@
     "@chakra-ui/react": "1.7.4",
     "@emotion/react": "11.7.1",
     "@emotion/styled": "11.6.0",
-    "@supabase/supabase-js": "1.35.7",
     "@testing-library/jest-dom": "5.17.0",
     "@testing-library/react": "12.1.5",
     "@testing-library/user-event": "13.5.0",
@@ -33,7 +32,8 @@
   "scripts": {
     "start": "vite",
     "build": "vite build",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -51,7 +51,14 @@
     ]
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.52.0",
     "@vitejs/plugin-react": "^4.0.3",
+    "eslint": "^8.0.1",
+    "eslint-config-standard-with-typescript": "^37.0.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-n": "^15.0.0 || ^16.0.0 ",
+    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-react": "^7.33.0",
     "vite": "^4.4.7"
   }
 }

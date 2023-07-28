@@ -30,7 +30,7 @@ export const Balance = ({ amount, label }: BalanceProps) => {
             aria-label="Toggle balance"
             variant="ghost"
             size="sm"
-            onClick={() => setShowBalance(!showBalance)}
+            onClick={() => setShowBalance((state) => !state)}
           />
         )}
       </Heading>

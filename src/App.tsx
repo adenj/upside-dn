@@ -2,24 +2,21 @@ import React, { ReactElement } from "react";
 import { ChakraProvider, Container } from "@chakra-ui/react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { theme } from "./theme/theme";
-import { Home } from "./views/Feed/Feed";
+import { Feed } from "./views/Feed/Feed";
 import { Nav } from "./components/Nav/Nav";
 import { Savers } from "./views/Savers/Savers";
 import { Saver } from "./views/Saver/Saver";
 import { useAccounts } from "./hooks/useAccounts";
 import { Loader } from "./components/Loader/Loader";
-import { Settings } from "./views/Settings/Settings";
 import { Footer } from "./components/Footer/Footer";
-import { useSession } from "./hooks/useSession";
-import { Login } from "./views/Login/Login";
-import { SignUp } from "./views/SignUp/SignUp";
-import { Expenses } from "./views/Expenses/Expenses";
+import { useToken } from "./hooks/useToken";
+import { TokenInput } from "./views/TokenInput/TokenInput";
+import { ROOT_PATH, FEED_PATH, TOKEN_PATH, SAVERS_PATH, SAVER_PATH } from "./constants/routes";
 
 const ProtectedRoute = ({ element }: { element: ReactElement }) => {
-  const { session } = useSession();
-
-  if (!session) {
-    return <Navigate to="/signup" />;
+  const { token } = useToken()
+  if (!token) {
+    return <Navigate to="/token" />;
   }
 
   return element;
@@ -27,7 +24,6 @@ const ProtectedRoute = ({ element }: { element: ReactElement }) => {
 
 export const App = () => {
   const { isLoading } = useAccounts();
-  const { session } = useSession();
 
   return (
     <ChakraProvider theme={theme}>
@@ -37,34 +33,19 @@ export const App = () => {
           <Loader />
         ) : (
           <Routes>
-            <Route path="/" element={<Navigate to="/feed" />} />
+            <Route path={ROOT_PATH} element={<Navigate to={FEED_PATH} />} />
+            <Route path={TOKEN_PATH} element={<TokenInput />} />
             <Route
-              path="/feed"
-              element={<ProtectedRoute element={<Home />} />}
+              path={FEED_PATH}
+              element={<ProtectedRoute element={<Feed />} />}
             />
             <Route
-              path="/savers"
+              path={SAVERS_PATH}
               element={<ProtectedRoute element={<Savers />} />}
             />
             <Route
-              path="/savers/:id"
+              path={SAVER_PATH}
               element={<ProtectedRoute element={<Saver />} />}
-            />
-            <Route
-              path="/settings"
-              element={<ProtectedRoute element={<Settings />} />}
-            />
-            <Route
-              path="/expenses"
-              element={<ProtectedRoute element={<Expenses />} />}
-            />
-            <Route
-              path="/login"
-              element={session ? <Navigate to="/feed" /> : <Login />}
-            />
-            <Route
-              path="/signup"
-              element={session ? <Navigate to="/feed" /> : <SignUp />}
             />
           </Routes>
         )}
