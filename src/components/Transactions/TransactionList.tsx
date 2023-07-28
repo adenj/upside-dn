@@ -20,8 +20,8 @@ export const TransactionList = ({ list }: TransactionListProps) => {
 
   return (
     <Stack spacing={12}>
-      {transactionsDates.map(({ date, transactions }) => {
-        return <TransactionGroup date={date} transactions={transactions} />;
+      {transactionsDates.map(({ date, transactions }, index) => {
+        return <TransactionGroup date={date} transactions={transactions} key={`transactions-${index}`} />;
       })}
     </Stack>
   );
@@ -44,7 +44,7 @@ const TransactionGroup = ({ transactions, date }: GroupedTransactions) => {
       <TransactionGroupHeading date={date} />
       <Accordion allowMultiple>
         {transactions.map((transaction) => {
-          return <Transaction transaction={transaction} />;
+          return <Transaction transaction={transaction} key={transaction.id} />;
         })}
       </Accordion>
     </Box>

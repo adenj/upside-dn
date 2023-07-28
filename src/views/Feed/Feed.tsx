@@ -8,7 +8,7 @@ import { useTransactionQuery } from "../../hooks/useTransactionQuery";
 import { LoadMoreButton } from "../../components/LoadMoreButton/LoadMoreButton";
 import { TransactionResource } from "../../types/transaction";
 
-export const Home = () => {
+export const Feed = () => {
   const { data: accounts } = useAccounts();
   const account = accounts.data.find(
     (acc) => acc.attributes.displayName === "Spending"

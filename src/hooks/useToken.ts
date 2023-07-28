@@ -1,7 +1,7 @@
-import { useSession } from "./useSession";
+import { useContext } from "react";
+import { TokenContext } from "../providers/TokenProvider";
 
 export const useToken = () => {
-  const { session } = useSession();
-  const token = session?.user?.user_metadata.api_key;
-  return { token };
+  const { token, setToken } = useContext(TokenContext);
+  return { token, setToken };
 };

@@ -1,6 +1,7 @@
 import { Box, Stack, Text } from "@chakra-ui/react";
 import React from "react";
 import { ExternalLink } from "../ExternalLink/ExternalLink";
+import { UP_GETTING_STARTED_URL } from "../../constants/urls";
 
 export const TokenInfoModal = () => (
   <Stack spacing="4">
@@ -23,7 +24,7 @@ export const TokenInfoModal = () => (
       <Text fontWeight="bold">How can I find my API Key?</Text>
       <Text>
         You will be able to access you Up API Key{" "}
-        <ExternalLink href="https://api.up.com.au/getting_started">
+        <ExternalLink href={UP_GETTING_STARTED_URL}>
           here
         </ExternalLink>
       </Text>
