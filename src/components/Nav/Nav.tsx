@@ -5,7 +5,7 @@ import { Logo } from "../Logo/Logo";
 import { Link as ReactRouterLink } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { ROOT_PATH, FEED_PATH, SAVERS_PATH } from "../../constants/routes";
-import { ColorModeSwitcher } from "../../ColorModeSwitcher";
+import { ColorModeSwitcher } from "../ColorModeSwitcher/ColorModeSwitcher";
 
 export const Nav = () => {
   return (
