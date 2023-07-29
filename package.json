@@ -17,6 +17,7 @@
     "date-fns": "2.30.0",
     "framer-motion": "4.1.17",
     "history": "5.2.0",
+    "prettier": "^3.0.0",
     "react": "17.0.2",
     "react-datepicker": "4.6.0",
     "react-dom": "17.0.2",
@@ -31,7 +32,8 @@
     "start": "vite",
     "build": "vite build",
     "serve": "vite preview",
-    "lint": "eslint --ext .js,.jsx,.ts,.tsx"
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx",
+    "format": "prettier --write ."
   },
   "eslintConfig": {
     "extends": "react-app"

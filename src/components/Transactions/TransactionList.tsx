@@ -21,7 +21,13 @@ export const TransactionList = ({ list }: TransactionListProps) => {
   return (
     <Stack spacing={12}>
       {transactionsDates.map(({ date, transactions }, index) => {
-        return <TransactionGroup date={date} transactions={transactions} key={`transactions-${index}`} />;
+        return (
+          <TransactionGroup
+            date={date}
+            transactions={transactions}
+            key={`transactions-${index}`}
+          />
+        );
       })}
     </Stack>
   );

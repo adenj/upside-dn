@@ -6,7 +6,7 @@ interface GroupedTransactions {
 }
 
 export const groupTransactionsByDate = (
-  data: TransactionResource[]
+  data: TransactionResource[],
 ): GroupedTransactions[] => {
   const groups = data.reduce((groups: any, item: any) => {
     const date = item.attributes.createdAt.split("T")[0];

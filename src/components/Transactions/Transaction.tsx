@@ -38,14 +38,14 @@ export const Transaction = ({
   const cardBg = useColorModeValue(background.light, background.dark);
 
   const isNegativeAmount = isNegative(
-    transaction.attributes.amount.valueInBaseUnits
+    transaction.attributes.amount.valueInBaseUnits,
   );
   const date = new Date(transaction.attributes.createdAt);
   const createdAtTime = format(date, "p").toLowerCase();
   const roundUp = transaction.attributes.roundUp;
   const internalTransfer = transaction.relationships.transferAccount.data;
   const accountName = accountsData.data.find(
-    (acc) => acc.id === internalTransfer?.id
+    (acc) => acc.id === internalTransfer?.id,
   )?.attributes.displayName;
 
   return (
@@ -95,7 +95,7 @@ export const Transaction = ({
                 color={!isNegativeAmount ? "green.500" : "default"}
               >
                 {`${!isNegativeAmount ? "+" : ""}${formatMoney(
-                  transaction.attributes.amount.valueInBaseUnits
+                  transaction.attributes.amount.valueInBaseUnits,
                 )}`}
               </Text>
             </Flex>

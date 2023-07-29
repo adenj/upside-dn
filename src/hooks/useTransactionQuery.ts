@@ -10,7 +10,7 @@ export const useTransactionQuery = (key: string) => {
 
   const fetchTransactions = async (path: string) => {
     return await fetch(path, createQueryProps(token!)).then((res) =>
-      res.json()
+      res.json(),
     );
   };
 
@@ -29,7 +29,7 @@ export const useTransactionQuery = (key: string) => {
     {
       keepPreviousData: true,
       getNextPageParam: (lastPage) => lastPage.links.next,
-    }
+    },
   );
 
   const list = data?.pages

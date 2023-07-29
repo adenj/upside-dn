@@ -41,7 +41,7 @@ const NavItem = ({ path, label }: { path: string; label: string }) => {
         fontWeight="black"
         color={
           location.pathname === path ||
-            (path === SAVERS_PATH && location.pathname.includes(path))
+          (path === SAVERS_PATH && location.pathname.includes(path))
             ? "brand.orange"
             : "default"
         }

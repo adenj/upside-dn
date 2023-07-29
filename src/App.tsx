@@ -11,10 +11,16 @@ import { Loader } from "./components/Loader/Loader";
 import { Footer } from "./components/Footer/Footer";
 import { useToken } from "./hooks/useToken";
 import { TokenInput } from "./views/TokenInput/TokenInput";
-import { ROOT_PATH, FEED_PATH, TOKEN_PATH, SAVERS_PATH, SAVER_PATH } from "./constants/routes";
+import {
+  ROOT_PATH,
+  FEED_PATH,
+  TOKEN_PATH,
+  SAVERS_PATH,
+  SAVER_PATH,
+} from "./constants/routes";
 
 const ProtectedRoute = ({ element }: { element: ReactElement }) => {
-  const { token } = useToken()
+  const { token } = useToken();
   if (!token) {
     return <Navigate to="/token" />;
   }

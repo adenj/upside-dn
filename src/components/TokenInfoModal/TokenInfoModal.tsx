@@ -24,9 +24,7 @@ export const TokenInfoModal = () => (
       <Text fontWeight="bold">How can I find my API Key?</Text>
       <Text>
         You will be able to access you Up API Key{" "}
-        <ExternalLink href={UP_GETTING_STARTED_URL}>
-          here
-        </ExternalLink>
+        <ExternalLink href={UP_GETTING_STARTED_URL}>here</ExternalLink>
       </Text>
     </Box>
   </Stack>

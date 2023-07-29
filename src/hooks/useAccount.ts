@@ -16,9 +16,9 @@ export const useAccount = (id: string) => {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        }
+        },
       ).then((res) => res.json());
-    }
+    },
   );
   return { data, isLoading, error };
 };
