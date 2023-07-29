@@ -20,11 +20,9 @@ export const Nav = () => {
             <Logo />
           </ReactRouterLink>
           <Flex gridGap={"10px"}>
-            <>
-              <NavItem label="Feed" path={FEED_PATH} />
-              <NavItem label="Savers" path={SAVERS_PATH} />
-              <ColorModeSwitcher />
-            </>
+            <NavItem label="Feed" path={FEED_PATH} />
+            <NavItem label="Savers" path={SAVERS_PATH} />
+            <ColorModeSwitcher />
           </Flex>
         </Flex>
       </Container>
