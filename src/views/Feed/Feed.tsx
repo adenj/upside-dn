@@ -11,7 +11,7 @@ import { TransactionResource } from "../../types/transaction";
 export const Feed = () => {
   const { data: accounts } = useAccounts();
   const account = accounts.data.find(
-    (acc) => acc.attributes.displayName === "Spending"
+    (acc) => acc.attributes.displayName === "Spending",
   );
 
   const { data, isLoading, fetchNextPage, isFetchingNextPage, hasNextPage } =

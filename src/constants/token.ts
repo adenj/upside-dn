@@ -7,4 +7,3 @@ export const setTokenLocalStorage = (value: string) => {
 };
 
 export const deleteTokenLocalStorage = () => localStorage.removeItem(TOKEN_KEY);
-

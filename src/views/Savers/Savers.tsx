@@ -11,7 +11,7 @@ export const Savers = () => {
   }
 
   const accounts = data.data.filter(
-    (acc) => acc.attributes.displayName !== "Spending"
+    (acc) => acc.attributes.displayName !== "Spending",
   );
 
   const totalSaved = accounts.reduce((prev, current) => {
