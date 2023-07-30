@@ -6,8 +6,10 @@ import { Link as ReactRouterLink } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { ROOT_PATH, FEED_PATH, SAVERS_PATH } from "../../constants/routes";
 import { ColorModeSwitcher } from "../ColorModeSwitcher/ColorModeSwitcher";
+import { useToken } from "../../hooks/useToken";
 
 export const Nav = () => {
+  const { token } = useToken()
   return (
     <Box as="nav" paddingBottom="4" paddingTop="8">
       <Container>
@@ -20,8 +22,14 @@ export const Nav = () => {
             <Logo />
           </ReactRouterLink>
           <Flex gridGap={"10px"}>
-            <NavItem label="Feed" path={FEED_PATH} />
-            <NavItem label="Savers" path={SAVERS_PATH} />
+            {
+              token && (
+                <>
+                  <NavItem label="Feed" path={FEED_PATH} />
+                  <NavItem label="Savers" path={SAVERS_PATH} />
+                </>
+              )
+            }
             <ColorModeSwitcher />
           </Flex>
         </Flex>
@@ -41,7 +49,7 @@ const NavItem = ({ path, label }: { path: string; label: string }) => {
         fontWeight="black"
         color={
           location.pathname === path ||
-          (path === SAVERS_PATH && location.pathname.includes(path))
+            (path === SAVERS_PATH && location.pathname.includes(path))
             ? "brand.orange"
             : "default"
         }
