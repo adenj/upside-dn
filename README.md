@@ -1,6 +1,7 @@
 # Upside dn
 
 The unofficial, open-source web app for Up Bank
+
 [![Netlify Status](https://api.netlify.com/api/v1/badges/365f7666-2337-4473-9b9e-1631e7ab8125/deploy-status)](https://app.netlify.com/sites/upside-dn/deploys)
 
 ### Requirements
