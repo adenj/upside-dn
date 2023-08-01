@@ -1,14 +1,17 @@
 import { ColorModeScript } from "@chakra-ui/react";
 import { BrowserRouter } from "react-router-dom";
 import React from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from 'react-dom/client'
 
 import { App } from "./App";
 import { AccountsProvider } from "./providers/AccountsProvider";
 import { QueryProvider } from "./providers/QueryProvider";
 import { TokenProvider } from "./providers/TokenProvider";
 
-ReactDOM.render(
+const container = document.getElementById("root");
+const root = createRoot(container!);
+
+root.render(
   <React.StrictMode>
     <ColorModeScript initialColorMode="dark" />
     <BrowserRouter>
@@ -20,6 +23,5 @@ ReactDOM.render(
         </TokenProvider>
       </QueryProvider>
     </BrowserRouter>
-  </React.StrictMode>,
-  document.getElementById("root"),
+  </React.StrictMode>
 );
