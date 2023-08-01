@@ -1409,18 +1409,17 @@
   resolved "https://registry.yarnpkg.com/@sinclair/typebox/-/typebox-0.27.8.tgz#6667fac16c436b5434a387a34dedb013198f6e6e"
   integrity sha512-+Fj43pSMwJs4KRrH/938Uf+uAELIgVBmQzg/q1YG10djyfA3TnrU8N8XzqCh/okZdszqBQTZf96idMfE5lnwTA==
 
-"@tanstack/query-core@^4.0.0-beta.1":
-  version "4.32.0"
-  resolved "https://registry.yarnpkg.com/@tanstack/query-core/-/query-core-4.32.0.tgz#e0f4a830283612430450c13badd353766423f523"
-  integrity sha512-ei4IYwL2kmlKSlCw9WgvV7PpXi0MiswVwfQRxawhJA690zWO3dU49igaQ/UMTl+Jy9jj9dK5IKAYvbX7kUvviQ==
+"@tanstack/query-core@4.32.1":
+  version "4.32.1"
+  resolved "https://registry.yarnpkg.com/@tanstack/query-core/-/query-core-4.32.1.tgz#6e364c33433b61f4dcef003725d4208e42b23860"
+  integrity sha512-VEAGHboOFWN/bvf/7cCoeLQfld0AA8n0V/kfc77W+FvxnnSwJufEh6gfjqpX5bRE/DEYfYDYdNtuL3KM+lIs8Q==
 
-"@tanstack/react-query@4.0.5":
-  version "4.0.5"
-  resolved "https://registry.yarnpkg.com/@tanstack/react-query/-/react-query-4.0.5.tgz#4597ac03394ddfa6ad8b5e1beb6282468623d398"
-  integrity sha512-tIggVlhoFevVpY/LkZroPmrERFHN8tw4aZLtgwSArzHmMJ03WQcaNvbbHy6GERidXtaMdUz+IeQryrE7cO7WPQ==
+"@tanstack/react-query@4.32.1":
+  version "4.32.1"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-query/-/react-query-4.32.1.tgz#8ba6ab4e0ee4513a0fe06f4452f1b400eb4f91fb"
+  integrity sha512-lPTfOq6bR6DorPaS018gTMd3zs8r06tlERiVY6BRP9SnDkkl4ckqeANava/jPLWrSZP+EA15loQUTmvZs6k2GA==
   dependencies:
-    "@tanstack/query-core" "^4.0.0-beta.1"
-    "@types/use-sync-external-store" "^0.0.3"
+    "@tanstack/query-core" "4.32.1"
     use-sync-external-store "^1.2.0"
 
 "@testing-library/dom@^9.0.0":
@@ -1586,11 +1585,6 @@
   integrity sha512-FSYhIjFlfOpGSRyVoMBMuS3ws5ehFQODymf3vlI7U1K8c7PHwWwFY7VREfmsuzHSOnoKs/9/Y983ayOs7eRzqw==
   dependencies:
     "@types/jest" "*"
-
-"@types/use-sync-external-store@^0.0.3":
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/@types/use-sync-external-store/-/use-sync-external-store-0.0.3.tgz#b6725d5f4af24ace33b36fafd295136e75509f43"
-  integrity sha512-EwmlvuaxPNej9+T4v5AuBPJa2x2UOJVdjCtDHgcDqitUeOtjnJKJ+apYjVcAoBEMjKW1VVFGZLUb5+qqa09XFA==
 
 "@types/yargs-parser@*":
   version "21.0.0"
