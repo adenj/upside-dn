@@ -1,4 +1,4 @@
-import { useInfiniteQuery } from "react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { useToken } from "./useToken";
 import { TransactionResponse } from "../types/transaction";
 import { createQueryProps } from "../utils/createQueryProps";
@@ -24,7 +24,7 @@ export const useTransactionQuery = (key: string) => {
     fetchNextPage,
     hasNextPage,
   } = useInfiniteQuery<TransactionResponse>(
-    key,
+    [key],
     ({ pageParam = path }) => fetchTransactions(pageParam),
     {
       keepPreviousData: true,
