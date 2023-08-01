@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import { baseUrl } from "../constants/upApi";
 import { TokenContext } from "../providers/TokenProvider";
 import { TransactionResponse } from "../types/transaction";
@@ -7,7 +7,7 @@ import { TransactionResponse } from "../types/transaction";
 export const useAccount = (id: string) => {
   const { token } = useContext(TokenContext);
   const { data, isLoading, error } = useQuery<TransactionResponse, Error>(
-    "account",
+    ["account"],
     async () => {
       return await fetch(
         `${baseUrl}/accounts/${id}/transactions?page[size]=30`,
