@@ -6,11 +6,7 @@ import { Skeleton } from "@chakra-ui/react";
 export const SkeletonBalance = () => {
   return (
     <Box textAlign="center" display="flex" justifyContent="center" paddingBottom={8}>
-      <Skeleton width="170px">
-        <Heading color="brand.orange" as="h2">
-          $3000
-      </Heading>
-      </Skeleton>
+      <Skeleton width="170px" height="44px" />
     </Box>
   );
 };
