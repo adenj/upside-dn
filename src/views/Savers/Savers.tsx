@@ -3,29 +3,40 @@ import React from "react";
 import { useAccounts } from "../../hooks/useAccounts";
 import { Saver } from "../../components/Saver/Saver";
 import { Balance } from "../../components/Balance/Balance";
+import { SkeletonBalance } from "../../components/Skeleton/SkeletonBalance/SkeletonBalance";
+import { SkeletonSaver } from "../../components/Skeleton/SkeletonSaver/SkeletonSaver";
 
 export const Savers = () => {
-  const { data, isLoading } = useAccounts();
-  if (isLoading) {
-    return <Text>Loading...</Text>;
-  }
+  const { data, isLoading, saversAccounts } = useAccounts();
 
-  const accounts = data.data.filter(
-    (acc) => acc.attributes.displayName !== "Spending",
-  );
-
-  const totalSaved = accounts.reduce((prev, current) => {
+  const totalSaved = saversAccounts?.reduce((prev, current) => {
     return prev + current.attributes.balance.valueInBaseUnits;
   }, 0);
 
+
   return (
     <Box>
-      <Balance label="Total saved" amount={totalSaved} />
-      <Stack spacing={6} align="stretch">
-        {accounts.map((account) => {
-          return <Saver account={account} />;
-        })}
-      </Stack>
+      {
+        isLoading ? (
+          <>
+            <SkeletonBalance />
+            <Stack spacing={6} align="stretch">
+              {[1, 2, 3, 4, 5, 6, 7, 8]?.map((index) => {
+                return <SkeletonSaver key={index} />;
+              })}
+            </Stack>
+          </>
+        ) : (
+            <>
+              <Balance label="Total saved" amount={totalSaved} />
+              <Stack spacing={6} align="stretch">
+                {saversAccounts?.map((account) => {
+                  return <Saver account={account} />;
+                })}
+              </Stack>
+            </>
+          )
+      }
     </Box>
   );
 };

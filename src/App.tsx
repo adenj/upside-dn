@@ -35,26 +35,26 @@ export const App = () => {
     <ChakraProvider theme={theme}>
       <Nav />
       <Container>
-        {isLoading ? (
+        {/* {isLoading ? (
           <Loader />
-        ) : (
-          <Routes>
-            <Route path={ROOT_PATH} element={<Navigate to={FEED_PATH} />} />
-            <Route path={TOKEN_PATH} element={<TokenInput />} />
-            <Route
-              path={FEED_PATH}
-              element={<ProtectedRoute element={<Feed />} />}
-            />
-            <Route
-              path={SAVERS_PATH}
-              element={<ProtectedRoute element={<Savers />} />}
-            />
-            <Route
-              path={SAVER_PATH}
-              element={<ProtectedRoute element={<Saver />} />}
-            />
-          </Routes>
-        )}
+        ) : ( */}
+        <Routes>
+          <Route path={ROOT_PATH} element={<Navigate to={FEED_PATH} />} />
+          <Route path={TOKEN_PATH} element={<TokenInput />} />
+          <Route
+            path={FEED_PATH}
+            element={<ProtectedRoute element={<Feed />} />}
+          />
+          <Route
+            path={SAVERS_PATH}
+            element={<ProtectedRoute element={<Savers />} />}
+          />
+          <Route
+            path={SAVER_PATH}
+            element={<ProtectedRoute element={<Saver />} />}
+          />
+        </Routes>
+        {/* )} */}
       </Container>
       <Footer />
     </ChakraProvider>

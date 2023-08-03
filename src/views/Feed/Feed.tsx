@@ -7,30 +7,37 @@ import { Loader } from "../../components/Loader/Loader";
 import { useTransactionQuery } from "../../hooks/useTransactionQuery";
 import { LoadMoreButton } from "../../components/LoadMoreButton/LoadMoreButton";
 import { TransactionResource } from "../../types/transaction";
+import { SkeletonTransactionList } from "../../components/Skeleton/SkeletonTransactionFeed/SkeletonTransactionFeed";
+import { SkeletonBalance } from "../../components/Skeleton/SkeletonBalance/SkeletonBalance";
 
 export const Feed = () => {
-  const { data: accounts } = useAccounts();
-  const account = accounts.data.find(
-    (acc) => acc.attributes.displayName === "Spending",
-  );
+  const { spendingAccount } = useAccounts();
 
   const { data, isLoading, fetchNextPage, isFetchingNextPage, hasNextPage } =
-    useTransactionQuery(account?.id!);
+    useTransactionQuery(spendingAccount?.id!);
 
-  if (isLoading) return <Loader />;
 
   return (
     <Box>
-      <Balance
-        label="Available"
-        amount={account?.attributes.balance.valueInBaseUnits!}
-      />
-      <TransactionList list={data as TransactionResource[]} />
-      <LoadMoreButton
-        fetchNextPage={fetchNextPage}
-        isFetchingNextPage={isFetchingNextPage}
-        hasNextPage={hasNextPage!}
-      />
+      {isLoading ? (
+        <>
+          <SkeletonBalance />
+          <SkeletonTransactionList />
+        </>
+      ) : (
+          <>
+            <Balance
+              label="Available"
+              amount={spendingAccount?.attributes.balance.valueInBaseUnits!}
+            />
+            <TransactionList list={data as TransactionResource[]} />
+            <LoadMoreButton
+              fetchNextPage={fetchNextPage}
+              isFetchingNextPage={isFetchingNextPage}
+              hasNextPage={hasNextPage!}
+            />
+          </>
+        )}
     </Box>
   );
 };
