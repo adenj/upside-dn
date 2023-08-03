@@ -3,7 +3,6 @@ import React from "react";
 import { TransactionList } from "../../components/Transactions/TransactionList";
 import { useAccounts } from "../../hooks/useAccounts";
 import { Balance } from "../../components/Balance/Balance";
-import { Loader } from "../../components/Loader/Loader";
 import { useTransactionQuery } from "../../hooks/useTransactionQuery";
 import { LoadMoreButton } from "../../components/LoadMoreButton/LoadMoreButton";
 import { TransactionResource } from "../../types/transaction";

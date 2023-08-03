@@ -2,7 +2,6 @@ import { Box, Heading, Skeleton, Flex } from "@chakra-ui/react";
 import React from "react";
 import { useParams } from "react-router";
 import { Balance } from "../../components/Balance/Balance";
-import { Loader } from "../../components/Loader/Loader";
 import { LoadMoreButton } from "../../components/LoadMoreButton/LoadMoreButton";
 import { TransactionList } from "../../components/Transactions/TransactionList";
 import { useAccounts } from "../../hooks/useAccounts";
