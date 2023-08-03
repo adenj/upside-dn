@@ -7,7 +7,6 @@ import { Nav } from "./components/Nav/Nav";
 import { Savers } from "./views/Savers/Savers";
 import { Saver } from "./views/Saver/Saver";
 import { useAccounts } from "./hooks/useAccounts";
-import { Loader } from "./components/Loader/Loader";
 import { Footer } from "./components/Footer/Footer";
 import { useToken } from "./hooks/useToken";
 import { TokenInput } from "./views/TokenInput/TokenInput";
@@ -28,35 +27,27 @@ const ProtectedRoute = ({ element }: { element: ReactElement }) => {
   return element;
 };
 
-export const App = () => {
-  const { isLoading } = useAccounts();
-
-  return (
-    <ChakraProvider theme={theme}>
-      <Nav />
-      <Container>
-        {isLoading ? (
-          <Loader />
-        ) : (
-          <Routes>
-            <Route path={ROOT_PATH} element={<Navigate to={FEED_PATH} />} />
-            <Route path={TOKEN_PATH} element={<TokenInput />} />
-            <Route
-              path={FEED_PATH}
-              element={<ProtectedRoute element={<Feed />} />}
-            />
-            <Route
-              path={SAVERS_PATH}
-              element={<ProtectedRoute element={<Savers />} />}
-            />
-            <Route
-              path={SAVER_PATH}
-              element={<ProtectedRoute element={<Saver />} />}
-            />
-          </Routes>
-        )}
-      </Container>
-      <Footer />
-    </ChakraProvider>
-  );
-};
+export const App = () => (
+  <ChakraProvider theme={theme}>
+    <Nav />
+    <Container>
+      <Routes>
+        <Route path={ROOT_PATH} element={<Navigate to={FEED_PATH} />} />
+        <Route path={TOKEN_PATH} element={<TokenInput />} />
+        <Route
+          path={FEED_PATH}
+          element={<ProtectedRoute element={<Feed />} />}
+        />
+        <Route
+          path={SAVERS_PATH}
+          element={<ProtectedRoute element={<Savers />} />}
+        />
+        <Route
+          path={SAVER_PATH}
+          element={<ProtectedRoute element={<Saver />} />}
+        />
+      </Routes>
+    </Container>
+    <Footer />
+  </ChakraProvider>
+);
