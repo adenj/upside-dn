@@ -1,7 +1,3 @@
 {
-  "platform": "github",
-  "extends": ["config:base", ":assignee(adenj)", ":labels(dependancies)"],
-  "dependencyDashboardApproval": {
-    "schedule": ["after 1 major"]
-  }
+  "extends": ["config:base", ":assignee(adenj)", ":labels(dependancies)"]
 }
