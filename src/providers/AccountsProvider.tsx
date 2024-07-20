@@ -1,5 +1,5 @@
 import React, { createContext, ReactNode } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery } from "react-query";
 import { baseUrl } from "../constants/upApi";
 import { useToken } from "../hooks/useToken";
 import { AccountResponse } from "../types/account";
