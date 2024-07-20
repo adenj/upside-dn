@@ -1,4 +1,4 @@
-import { useInfiniteQuery } from "@tanstack/react-query";
+import { useInfiniteQuery } from "react-query";
 import { useToken } from "./useToken";
 import { TransactionResponse } from "../types/transaction";
 import { createQueryProps } from "../utils/createQueryProps";

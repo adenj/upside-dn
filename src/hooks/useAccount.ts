@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery } from "react-query";
 import { baseUrl } from "../constants/upApi";
 import { TokenContext } from "../providers/TokenProvider";
 import { TransactionResponse } from "../types/transaction";
