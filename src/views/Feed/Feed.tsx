@@ -8,6 +8,9 @@ import { LoadMoreButton } from "../../components/LoadMoreButton/LoadMoreButton";
 import { TransactionResource } from "../../types/transaction";
 import { SkeletonTransactionList } from "../../components/Skeleton/SkeletonTransactionFeed/SkeletonTransactionFeed";
 import { SkeletonBalance } from "../../components/Skeleton/SkeletonBalance/SkeletonBalance";
+import { useQuery } from "react-query";
+
+console.log(useQuery)
 
 console.log("Hello, world!")
 

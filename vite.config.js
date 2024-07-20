@@ -5,6 +5,8 @@ export default defineConfig(() => {
   return {
     build: {
       outDir: "build",
+      minify: "esbuild",
+      sourcemap: true,
     },
     server: {
       port: 3000,
