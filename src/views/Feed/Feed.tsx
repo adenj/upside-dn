@@ -9,6 +9,8 @@ import { TransactionResource } from "../../types/transaction";
 import { SkeletonTransactionList } from "../../components/Skeleton/SkeletonTransactionFeed/SkeletonTransactionFeed";
 import { SkeletonBalance } from "../../components/Skeleton/SkeletonBalance/SkeletonBalance";
 
+console.log("Hello, world!")
+
 export const Feed = () => {
   const { spendingAccount } = useAccounts();
 
@@ -24,19 +26,19 @@ export const Feed = () => {
           <SkeletonTransactionList />
         </>
       ) : (
-          <>
-            <Balance
-              label="Available"
-              amount={spendingAccount?.attributes.balance.valueInBaseUnits!}
-            />
-            <TransactionList list={data as TransactionResource[]} />
-            <LoadMoreButton
-              fetchNextPage={fetchNextPage}
-              isFetchingNextPage={isFetchingNextPage}
-              hasNextPage={hasNextPage!}
-            />
-          </>
-        )}
+        <>
+          <Balance
+            label="Available"
+            amount={spendingAccount?.attributes.balance.valueInBaseUnits!}
+          />
+          <TransactionList list={data as TransactionResource[]} />
+          <LoadMoreButton
+            fetchNextPage={fetchNextPage}
+            isFetchingNextPage={isFetchingNextPage}
+            hasNextPage={hasNextPage!}
+          />
+        </>
+      )}
     </Box>
   );
 };
